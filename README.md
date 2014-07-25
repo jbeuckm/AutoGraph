@@ -6,10 +6,16 @@ This project is a port of my original [AutoGraph](https://github.com/jbeuckm/Aut
 The original was getting usable but needed a redesign to support the next steps in the roadmap: serialization, complexes, etc.
 
 I am expecting a variety of benefits from the port:
-1.
-1. Cleaner testing with Protractor
-2. Automated data binding (originally manual)
-3.
+
+1. better architecture with lessons learned
+  * simple hash for serializable component models
+  * direct calls instead of events for wires
+2. automated data binding (originally manual)
+3. cleaner testing with Protractor
+4. markup instead of procedural component interface building
+5. cleaner ancestor references with inherited scopes
+6. automated view building (originally manual)
+7. so much more...
 
 ###ROADMAP###
 
@@ -25,5 +31,6 @@ I am expecting a variety of benefits from the port:
 + serialization to LocalStorage
 + deserialization
 + Time Series Graph Component
-+ OAuth.io Interface
++ Complex component building
++ OAuth.io interface
 
