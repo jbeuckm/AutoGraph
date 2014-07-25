@@ -1,0 +1,76 @@
+
+
+body {
+  background-color: #000;
+  margin: 0;
+  font-family: "Helvetica";
+  color: #fff;
+}
+
+.container svg {
+  position: absolute;
+}
+
+.component-library-scroller {
+  background-color: #333;
+  position: absolute;;
+  right: 0;
+  width: 175px;
+  overflow: auto;
+}
+
+.component-option {
+  background-color: #555;
+  padding: 4px;
+  margin: 5px;
+  width: 146px;
+  cursor: pointer;
+  border: 1px solid #999;
+  border-radius: 3px;
+}
+.component-option:hover {
+  background-color: #000;
+}
+
+
+.component-rect {
+  stroke: #ddd;
+  stroke-width: 1;
+  fill: rgba(0,0,0,.5);
+  cursor: move;
+}
+.selected-rect {
+  stroke: #5ac;
+  stroke-width: 2;
+  fill: transparent;
+  pointer-events: none;
+}
+.component-terminal {
+  fill: #ddd;
+}
+.component-text {
+  fill: #fff;
+  font-family: "Helvetica";
+  font-size: 16px;
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.terminal-label {
+  font-size: 10px;
+  fill: #bbb;
+}
+
+.wire {
+  stroke: #ddd;
+}
+
+input {
+  background-color: #fff;
+}
+

@@ -1,0 +1,29 @@
+<html ng-app="AutoGraph">
+
+<head>
+  <title>AutoGraph</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<autograph ng-controller="AutographController"></autograph>
+
+<component-library ng-controller="ComponentLibraryController"></component-library>
+
+</div>
+
+<script src="../bower_components/angular/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="autograph-directive.js"></script>
+<script src="autograph-controller.js"></script>
+<script src="component-library/component-library-directive.js"></script>
+<script src="component-library/component-library-controller.js"></script>
+<script src="component-library/component-list-item-directive.js"></script>
+<script src="component-library/component-library-service.js"></script>
+
+</body>
+
+</html>

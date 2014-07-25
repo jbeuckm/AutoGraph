@@ -1,0 +1,5 @@
+<div class="component-library-scroller">
+
+    <component-list-item ng-repeat="component in components"></component-list-item>
+
+</div>

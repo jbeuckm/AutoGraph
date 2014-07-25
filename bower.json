@@ -1,0 +1,26 @@
+{
+  "name": "AutoGraph",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jbeuckm/AutoGraph",
+  "authors": [
+    "joe beuckman <joebeuckman@gmail.com>"
+  ],
+  "description": "A visual data routing automation tool",
+  "main": "index.html",
+  "keywords": [
+    "max",
+    "pipes",
+    "ifttt"
+  ],
+  "license": "NO",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.20"
+  }
+}

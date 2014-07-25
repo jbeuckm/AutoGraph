@@ -23,5 +23,6 @@
   "bugs": {
     "url": "https://github.com/jbeuckm/AutoGraph/issues"
   },
-  "homepage": "https://github.com/jbeuckm/AutoGraph"
+  "homepage": "https://github.com/jbeuckm/AutoGraph",
+  "dependencies": {}
 }

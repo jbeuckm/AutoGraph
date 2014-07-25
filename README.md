@@ -19,8 +19,8 @@ I am expecting a variety of benefits from the port:
 
 ###ROADMAP###
 
-+ establish NPM project
-+ verify SVG directives will work as they do in my wildest dreams
++ ~~establish NPM project~~
++ ~~verify SVG directives will work as they do in my wildest dreams~~
 + protractor running on TravisCI
 + headless Component & Wires implementation
 + templated Component directive interface
