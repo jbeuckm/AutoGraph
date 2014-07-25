@@ -1,0 +1,27 @@
+{
+  "name": "AutoGraph",
+  "version": "0.0.0",
+  "description": "A visual data routing automation tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jbeuckm/AutoGraph.git"
+  },
+  "keywords": [
+    "visual",
+    "programming",
+    "language",
+    "ifttt",
+    "max",
+    "pipes"
+  ],
+  "author": "Joe Beuckman",
+  "license": "NO",
+  "bugs": {
+    "url": "https://github.com/jbeuckm/AutoGraph/issues"
+  },
+  "homepage": "https://github.com/jbeuckm/AutoGraph"
+}

@@ -31,6 +31,6 @@ I am expecting a variety of benefits from the port:
 + serialization to LocalStorage
 + deserialization
 + Time Series Graph Component
-+ Complex component building
++ Complex Component building
 + OAuth.io interface
 
