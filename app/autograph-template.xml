@@ -1,14 +1,14 @@
 
-<svg>
+<svg xmlns="http://www.w3.org/2000/svg">
 
-    <g id="wires-layer">
+    <g id="control-layer">
+    </g>
+
+    <g id="wire-layer">
     </g>
 
     <g id="component-layer">
-
-    </g>
-
-    <g id="control-layer">
+        <component ng-repeat="component in placedComponents"></component>
     </g>
 
 </svg>

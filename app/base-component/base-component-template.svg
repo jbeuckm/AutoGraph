@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+
+    <g xmlns="http://www.w3.org/2000/svg" class="component" transform="translate({{component.x}} {{component.y}})">
+
+        <rect class="component-rect" width="58" height="58" style="stroke: rgb(221, 221, 221);"></rect>
+
+        <g transform="translate(4,4)">
+            <rect width="50" height="50" style="fill: rgb(85, 85, 85); cursor: pointer;"></rect>
+        </g>
+
+        <g>
+            <g transform="translate({{20*$index}} 0)" class="terminal" ng-repeat="terminal in component.inputs">
+                <rect height="4" width="15" class="component-terminal nodrag terminal-input" data-terminal="c3" y="-4"></rect>
+                <text class="terminal-label" dy="-16" style="visibility: hidden;">input</text>
+            </g>
+        </g>
+
+        <g transform="translate(0, 58)">
+            <g transform="translate({{20*$index}} 0)" class="terminal" ng-repeat="terminal in component.outputs">
+                <rect height="4" width="15" class="component-terminal nodrag terminal-output" data-terminal="c5"></rect>
+                <text class="terminal-label" dy="32" style="visibility: hidden;">output</text>
+            </g>
+        </g>
+
+    </g>
+
+</svg>
