@@ -1,7 +1,7 @@
 angular.module('AutoGraph').controller('AutographController', ['$scope', function($scope) {
 
-    $scope.placedComponents = [
-        {
+    $scope.placedComponents = {
+        "demo": {
             x: 100,
             y: 50,
             inputs: [
@@ -14,6 +14,6 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', functio
                 'out3'
             ]
         }
-    ];
+    };
 
 }]);

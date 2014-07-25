@@ -8,7 +8,9 @@
     </g>
 
     <g id="component-layer">
-        <component ng-repeat="component in placedComponents"></component>
+        <component ng-repeat="(id, component) in placedComponents">
+            <text class="component-text" dy=".9em">{{id}}</text>
+        </component>
     </g>
 
 </svg>
