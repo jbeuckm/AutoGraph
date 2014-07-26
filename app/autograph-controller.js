@@ -1,4 +1,4 @@
-angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc4122', function($scope, rfc4122) {
+angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc4122', function($scope, rfc4122, cursorModeService) {
 
     $scope.placedComponents = {};
 
