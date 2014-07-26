@@ -1,1 +1,1 @@
-<div class="component-option">{{component.label}}</div>
+<div class="component-option" ng-click="setCursorMode('component', component)">{{component.label}}</div>
