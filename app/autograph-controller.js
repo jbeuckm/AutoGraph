@@ -29,4 +29,14 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
         ]
     };
 
+    $scope.placeNewComponent = function(modelTemplate, x, y) {
+
+        var newComponentModel = JSON.parse(JSON.stringify(modelTemplate));
+
+        newComponentModel.x = x;
+        newComponentModel.y = y;
+
+        $scope.placedComponents[rfc4122.newUuid()] = newComponentModel;
+    };
+
 }]);
