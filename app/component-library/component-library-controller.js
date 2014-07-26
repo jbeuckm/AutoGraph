@@ -1,7 +1,8 @@
-angular.module('AutoGraph').controller('ComponentLibraryController', ['$scope', function($scope) {
+angular.module('AutoGraph').controller('ComponentLibraryController', ['$scope', 'componentLibraryService', function($scope, componentLibraryService) {
 
-    $scope.components = [
-        "delay"
-    ];
+    componentLibraryService.loadComponentLibrary('../components/components.json').then(function(data){
+console.log(data);
+        $scope.components = data;
+    });
 
 }]);

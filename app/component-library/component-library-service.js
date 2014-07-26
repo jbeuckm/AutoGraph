@@ -6,7 +6,7 @@ angular.module('AutoGraph').factory('componentLibraryService', function($http) {
 
             return $http.get(libraryJSON)
                 .then(function(result) {
-                    return JSON.parse(result.data);
+                    return result.data;
                 });
         }
 
