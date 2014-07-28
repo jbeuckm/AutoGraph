@@ -1,4 +1,4 @@
-angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc4122', function($scope, rfc4122, cursorModeService) {
+angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc4122', 'cursorModeService', function($scope, rfc4122, cursorModeService) {
 
     $scope.placedComponents = {};
 
@@ -29,8 +29,18 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
         ]
     };
 
-    $scope.placeNewComponent = function(modelTemplate, x, y) {
+    $scope.mouseUp = function(e) {
+        console.log(e);
+        console.log(cursorModeService);
+        switch (cursorModeService.mode) {
+            case 'component':
+                $scope.placeNewComponent(cursorModeService.object, e.x, e.y);
+                break;
+        }
+    };
 
+    $scope.placeNewComponent = function(modelTemplate, x, y) {
+console.log('placeNewComponent', modelTemplate, x, y);
         var newComponentModel = JSON.parse(JSON.stringify(modelTemplate));
 
         newComponentModel.x = x;

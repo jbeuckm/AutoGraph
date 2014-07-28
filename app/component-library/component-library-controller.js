@@ -6,6 +6,8 @@ angular.module('AutoGraph').controller('ComponentLibraryController', ['$scope', 
 
     });
 
-    $scope.setCursorMode = cursorModeService.setCursorMode;
+    $scope.setCursorMode = function(mode, object) {
+        cursorModeService.setCursorMode(mode, object);
+    };
 
 }]);
