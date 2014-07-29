@@ -18,6 +18,9 @@ angular.module('AutoGraph').directive('component', function(){
             }
 
             elem.replaceWith(child);
+
+            scope.rectWidth = 100;
+            scope.rectHeight = 30;
         }
 
     };

@@ -2,7 +2,7 @@
 
     <g class="component" transform="translate({{component.x}} {{component.y}})">
 
-        <rect class="component-rect" width="58" height="58" style="stroke: rgb(221, 221, 221);"></rect>
+        <rect class="component-rect" width="{{component.rectWidth}}" height="{{component.rectHeight}}" style="stroke: rgb(221, 221, 221);"></rect>
 
         <g transform="translate(4,4)" ng-transclude>
 
