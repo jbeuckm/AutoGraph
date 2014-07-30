@@ -9,6 +9,8 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
                     $scope.placeNewComponent(cursorModeService.object, e.x, e.y);
                     break;
             }
+
+            AutographSerializerService.saveAutograph($scope.placedComponents);
         };
 
         $scope.placeNewComponent = function(modelTemplate, x, y) {
@@ -19,8 +21,6 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
             newComponentModel.y = y;
 
             $scope.placedComponents[rfc4122.newUuid()] = newComponentModel;
-
-            AutographSerializerService.saveAutograph($scope.placedComponents);
         };
 
         $scope.clearAutograph = function() {
