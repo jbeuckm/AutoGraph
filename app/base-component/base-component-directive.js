@@ -12,16 +12,16 @@ angular.module('AutoGraph').directive('component', function($document){
             element.on('mousedown', function(event) {
                 // Prevent default dragging of selected content
                 event.preventDefault();
-                startX = event.pageX - scope.x;
-                startY = event.pageY - scope.y;
+                startX = event.pageX - scope.component.x;
+                startY = event.pageY - scope.component.y;
                 $document.on('mousemove', mousemove);
                 $document.on('mouseup', mouseup);
             });
 
-            console.log(scope);
             function mousemove(event) {
-                scope.y = event.pageY - startY;
-                scope.x = event.pageX - startX;
+                scope.component.y = event.pageY - startY;
+                scope.component.x = event.pageX - startX;
+                scope.$apply();
 /*
                 element.css({
                     top: y + 'px',
