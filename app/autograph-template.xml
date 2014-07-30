@@ -1,5 +1,5 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" ng-mouseup="mouseUp($event)">
+<svg xmlns="http://www.w3.org/2000/svg" ng-mouseup="mouseUp($event)" width="{{windowWidth}}" height="{{windowHeight}}">
 
     <g id="control-layer">
         <rect style="fill: rgba(100, 100, 100, 0.0980392);" width="1856" height="556"></rect>

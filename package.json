@@ -39,5 +39,8 @@
     "grunt-jslint": "^1.1.11",
     "grunt-open": "^0.2.3",
     "http-proxy": "^1.1.2"
+  },
+  "scripts": {
+    "test": "protractor tests/spec.js"
   }
 }
