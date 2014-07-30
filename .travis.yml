@@ -5,7 +5,7 @@ before_install:
 - npm install -g -q bower
 - npm install -g -q grunt-cli
 - npm install -g -q protractor
-- webdriver-manager update
+- webdriver-manager update --chrome
 - webdriver-manager start &
 install:
 - npm install -q
