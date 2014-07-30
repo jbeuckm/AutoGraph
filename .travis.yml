@@ -1,14 +1,14 @@
+language: node_js
+node_js:
+- '0.10'
 before_install:
 - npm install -g -q bower
 - npm install -g -q grunt-cli
 - npm install -g -q protractor
 - webdriver-manager update
-- webdriver-manager start
+- webdriver-manager start &
 install:
 - npm install -q
 - bower install
-language: node_js
-node_js:
-- '0.10'
 script:
 - protractor tests/spec.js
