@@ -1,52 +1,32 @@
-angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc4122', 'cursorModeService', function($scope, rfc4122, cursorModeService) {
+angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc4122', 'cursorModeService', 'AutographSerializerService',
+    function($scope, rfc4122, cursorModeService, AutographSerializerService) {
 
-    $scope.placedComponents = {};
+        $scope.placedComponents = AutographSerializerService.loadAutograph();
 
-    $scope.placedComponents[rfc4122.newUuid()] = {
-        label: "first",
-        x: 100,
-        y: 50,
-        inputs: [
-            'in1'
-        ],
-        outputs: [
-            'out1'
-        ]
-    };
+        $scope.mouseUp = function(e) {
+            switch (cursorModeService.mode) {
+                case 'component':
+                    $scope.placeNewComponent(cursorModeService.object, e.x, e.y);
+                    break;
+            }
+        };
 
-    $scope.placedComponents[rfc4122.newUuid()] =  {
-        label: "second",
-        x: 300,
-        y: 50,
-        inputs: [
-            'in1',
-            'in2'
-        ],
-        outputs: [
-            'out1',
-            'out2',
-            'out3'
-        ]
-    };
+        $scope.placeNewComponent = function(modelTemplate, x, y) {
 
-    $scope.mouseUp = function(e) {
-        console.log(e);
-        console.log(cursorModeService);
-        switch (cursorModeService.mode) {
-            case 'component':
-                $scope.placeNewComponent(cursorModeService.object, e.x, e.y);
-                break;
+            var newComponentModel = JSON.parse(JSON.stringify(modelTemplate));
+
+            newComponentModel.x = x;
+            newComponentModel.y = y;
+
+            $scope.placedComponents[rfc4122.newUuid()] = newComponentModel;
+
+            AutographSerializerService.saveAutograph($scope.placedComponents);
+        };
+
+        $scope.clearAutograph = function() {
+            $scope.placedComponents = {};
+            AutographSerializerService.saveAutograph($scope.placedComponents);
         }
-    };
 
-    $scope.placeNewComponent = function(modelTemplate, x, y) {
-console.log('placeNewComponent', modelTemplate, x, y);
-        var newComponentModel = JSON.parse(JSON.stringify(modelTemplate));
-
-        newComponentModel.x = x;
-        newComponentModel.y = y;
-
-        $scope.placedComponents[rfc4122.newUuid()] = newComponentModel;
-    };
-
-}]);
+    }
+]);

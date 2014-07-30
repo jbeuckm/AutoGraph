@@ -5800,18 +5800,18 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
         if (booleanKey) {
           this.$$element.prop(key, value);
-          attrName = booleanKey;
+          key = booleanKey;
         }
 
         this[key] = value;
 
         // translate normalized key to actual key
-        if (attrName) {
-          this.$attr[key] = attrName;
+        if (key) {
+          this.$attr[key] = key;
         } else {
-          attrName = this.$attr[key];
-          if (!attrName) {
-            this.$attr[key] = attrName = snake_case(key, '-');
+          key = this.$attr[key];
+          if (!key) {
+            this.$attr[key] = key = snake_case(key, '-');
           }
         }
 
@@ -5825,9 +5825,9 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
         if (writeAttr !== false) {
           if (value === null || value === undefined) {
-            this.$$element.removeAttr(attrName);
+            this.$$element.removeAttr(key);
           } else {
-            this.$$element.attr(attrName, value);
+            this.$$element.attr(key, value);
           }
         }
 
@@ -6524,27 +6524,27 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
                 lastValue,
                 parentGet, parentSet, compare;
 
-            isolateScope.$$isolateBindings[scopeName] = mode + attrName;
+            isolateScope.$$isolateBindings[scopeName] = mode + key;
 
             switch (mode) {
 
               case '@':
-                attrs.$observe(attrName, function(value) {
+                attrs.$observe(key, function(value) {
                   isolateScope[scopeName] = value;
                 });
-                attrs.$$observers[attrName].$$scope = scope;
-                if( attrs[attrName] ) {
+                attrs.$$observers[key].$$scope = scope;
+                if( attrs[key] ) {
                   // If the attribute has been provided then we trigger an interpolation to ensure
                   // the value is there for use in the link fn
-                  isolateScope[scopeName] = $interpolate(attrs[attrName])(scope);
+                  isolateScope[scopeName] = $interpolate(attrs[key])(scope);
                 }
                 break;
 
               case '=':
-                if (optional && !attrs[attrName]) {
+                if (optional && !attrs[key]) {
                   return;
                 }
-                parentGet = $parse(attrs[attrName]);
+                parentGet = $parse(attrs[key]);
                 if (parentGet.literal) {
                   compare = equals;
                 } else {
@@ -6555,7 +6555,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
                   lastValue = isolateScope[scopeName] = parentGet(scope);
                   throw $compileMinErr('nonassign',
                       "Expression '{0}' used with directive '{1}' is non-assignable!",
-                      attrs[attrName], newIsolateScopeDirective.name);
+                      attrs[key], newIsolateScopeDirective.name);
                 };
                 lastValue = isolateScope[scopeName] = parentGet(scope);
                 isolateScope.$watch(function parentValueWatch() {
@@ -6575,7 +6575,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
                 break;
 
               case '&':
-                parentGet = $parse(attrs[attrName]);
+                parentGet = $parse(attrs[key]);
                 isolateScope[scopeName] = function(locals) {
                   return parentGet(scope, locals);
                 };
@@ -15940,13 +15940,13 @@ forEach(BOOLEAN_ATTR, function(propName, attrName) {
   // binding to multiple is not supported
   if (propName == "multiple") return;
 
-  var normalized = directiveNormalize('ng-' + attrName);
+  var normalized = directiveNormalize('ng-' + key);
   ngAttributeAliasDirectives[normalized] = function() {
     return {
       priority: 100,
       link: function(scope, element, attr) {
         scope.$watch(attr[normalized], function ngBooleanAttrWatchAction(value) {
-          attr.$set(attrName, !!value);
+          attr.$set(key, !!value);
         });
       }
     };
@@ -15956,15 +15956,15 @@ forEach(BOOLEAN_ATTR, function(propName, attrName) {
 
 // ng-src, ng-srcset, ng-href are interpolated
 forEach(['src', 'srcset', 'href'], function(attrName) {
-  var normalized = directiveNormalize('ng-' + attrName);
+  var normalized = directiveNormalize('ng-' + key);
   ngAttributeAliasDirectives[normalized] = function() {
     return {
       priority: 99, // it needs to run after the attributes are interpolated
       link: function(scope, element, attr) {
-        var propName = attrName,
-            name = attrName;
+        var propName = key,
+            name = key;
 
-        if (attrName === 'href' &&
+        if (key === 'href' &&
             toString.call(element.prop('href')) === '[object SVGAnimatedString]') {
           name = 'xlinkHref';
           attr.$attr[name] = 'xlink:href';

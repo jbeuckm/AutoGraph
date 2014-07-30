@@ -1,0 +1,11 @@
+{
+  "label": "delay",
+  "inputs": [
+    "input",
+    "period"
+  ],
+  "outputs": [
+    "output"
+  ],
+  "period": 0
+}
