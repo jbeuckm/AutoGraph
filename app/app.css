@@ -64,6 +64,7 @@ body {
 .terminal-label {
   font-size: 10px;
   fill: #bbb;
+  visibility: hidden;
 }
 
 .wire {

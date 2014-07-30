@@ -11,14 +11,14 @@
         <g>
             <g transform="translate({{20*$index}} 0)" class="terminal" ng-repeat="terminal in component.inputs">
                 <rect height="4" width="15" class="component-terminal nodrag terminal-input" y="-4"></rect>
-                <text class="terminal-label" dy="-16" style="visibility: hidden;">input</text>
+                <text class="terminal-label" dy="-16">input</text>
             </g>
         </g>
 
-        <g transform="translate(0, 58)">
+        <g transform="translate(0, {{rectHeight}})">
             <g transform="translate({{20*$index}} 0)" class="terminal" ng-repeat="terminal in component.outputs">
                 <rect height="4" width="15" class="component-terminal nodrag terminal-output"></rect>
-                <text class="terminal-label" dy="32" style="visibility: hidden;">output</text>
+                <text class="terminal-label" dy="32">output</text>
             </g>
         </g>
 
