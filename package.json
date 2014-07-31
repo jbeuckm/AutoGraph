@@ -4,7 +4,7 @@
   "description": "A visual data routing automation tool",
   "main": "index.js",
   "scripts": {
-    "test": "protractor tests/config.js"
+    "test": "karma start karma.config.js"
   },
   "repository": {
     "type": "git",
