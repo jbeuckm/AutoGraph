@@ -23,7 +23,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
             $scope.placedComponents[rfc4122.newUuid()] = newComponentModel;
         };
 
-        $scope.clearAutograph = function() {
+        $scope.clearComponents = function() {
             $scope.placedComponents = {};
             AutographSerializerService.saveAutograph($scope.placedComponents);
         }
