@@ -6,7 +6,9 @@ before_install:
 - npm install -g -q grunt-cli
 - npm install -g karma-cli
 - npm install -g karma-jasmine
-- npm install -g karma-chrome-launcher
+- npm install -g karma-firefox-launcher
+- "export DISPLAY=:99.0"
+- "sh -e /etc/init.d/xvfb start"
 install:
 - npm install -q
 - bower install

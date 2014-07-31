@@ -28,9 +28,7 @@
     "url": "https://github.com/jbeuckm/AutoGraph/issues"
   },
   "homepage": "https://github.com/jbeuckm/AutoGraph",
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-commands": "^0.1.6",
@@ -38,6 +36,8 @@
     "grunt-jsdoc": "~0.5.4",
     "grunt-jslint": "^1.1.11",
     "grunt-open": "^0.2.3",
-    "http-proxy": "^1.1.2"
+    "http-proxy": "^1.1.2",
+    "karma": "^0.12.19",
+    "karma-firefox-launcher": "^0.1.3"
   }
 }
