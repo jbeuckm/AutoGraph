@@ -4,10 +4,11 @@ node_js:
 before_install:
 - npm install -g -q bower
 - npm install -g -q grunt-cli
-- npm install -g -q protractor
-- webdriver-manager update --chrome
-- webdriver-manager start &
+- npm install -g karma-cli
+- npm install -g karma-jasmine
+- npm install -g karma-chrome-launcher
 install:
 - npm install -q
 - bower install
+- grunt launch
 

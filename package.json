@@ -38,6 +38,7 @@
     "grunt-jsdoc": "~0.5.4",
     "grunt-jslint": "^1.1.11",
     "grunt-open": "^0.2.3",
-    "http-proxy": "^1.1.2"
+    "http-proxy": "^1.1.2",
+    ""
   }
 }
