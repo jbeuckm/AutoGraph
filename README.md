@@ -1,6 +1,8 @@
 AutoGraph
 =========
 
+[![Build Status](https://travis-ci.org/jbeuckm/AutoGraph.png)](https://travis-ci.org/jbeuckm/AutoGraph)
+
 This project is a port of my original [AutoGraph](https://github.com/jbeuckm/AutoGraph--old-version- "Original AutoGraph Project") to AngularJS.
 
 The original was getting usable but needed a redesign to support the next steps in the roadmap: serialization, complexes, etc.
@@ -21,8 +23,7 @@ I am expecting a variety of benefits from the port:
 
 + ~~establish NPM project~~
 + ~~verify SVG directives will work as they do in my wildest dreams~~
-+ protractor running on TravisCI
-+ headless Component & Wires implementation
++ ~~protractor running on TravisCI~~ (using karma with firefox instead)
 + templated Component directive interface
 + D3 Wires interface
 + OOP Controllers
