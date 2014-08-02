@@ -1,13 +1,13 @@
 angular.module('AutoGraph').directive('component', function($document){
 
-
     return {
+        type: 'svg',
         restrict: 'E',
         replace: true,
         transclude: true,
         templateUrl: 'base-component/base-component-template.svg',
 
-        link: function (scope, element, attributes) {
+        link: function (scope, element, attributes, ctrl, transclude) {
 
             element.on('mousedown', function(event) {
                 // Prevent default dragging of selected content

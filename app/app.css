@@ -17,6 +17,7 @@ body {
   right: 0;
   width: 175px;
   overflow: auto;
+  height: 100%;
 }
 
 .component-option {

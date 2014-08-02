@@ -21,7 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.20",
+    "angular": "master",
     "angular-mocks": "~1.2.21",
     "d3": "~3.4.11"
   }

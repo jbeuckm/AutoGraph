@@ -1,6 +1,7 @@
 angular.module('AutoGraph').directive('autograph', function($window){
 
     return {
+        type: 'svg',
         restrict: 'E',
         replace: true,
         templateUrl: 'autograph-template.xml',

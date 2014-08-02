@@ -12,11 +12,12 @@ describe('wire-directive', function(){
     }));
 
     it('should place and clear wires', function(){
-        expect(scope.placedComponents).not.toEqual(null);
-        scope.placeNewComponent({}, 1, 2);
+
+        scope.placeNewComponent({}, 10, 10);
+        scope.placeNewComponent({}, 250, 10);
         expect(scope.placedComponents).not.toEqual({});
-        scope.clearComponents();
-        expect(scope.placedComponents).toEqual({});
+
+
     });
 
 });

@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg">
 
     <g class="component" transform="translate({{component.x}} {{component.y}})">
 
         <rect class="component-rect" width="{{rectWidth}}" height="{{rectHeight}}"></rect>
 
-        <g transform="translate(4,4)" ng-transclude>
+        <g class="component-implementation-container" transform="translate(4,4)" ng-transclude>
 
         </g>
 
@@ -23,5 +22,3 @@
         </g>
 
     </g>
-
-</svg>
