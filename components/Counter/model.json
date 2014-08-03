@@ -1,10 +1,10 @@
 {
   "label": "counter",
   "inputs": [
-    "tick"
+    { "label": "tick" }
   ],
   "outputs": [
-    "count"
+    { "label": "count" }
   ],
   "count": 0
 }

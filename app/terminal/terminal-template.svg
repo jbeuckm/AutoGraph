@@ -1,5 +1,5 @@
-<g class="terminal">
+<g class="terminal" ng-mousedown="mouseDown($event)">
     <rect height="{{height}}" width="15" class="component-terminal nodrag terminal-input" y="{{dy}}" ng-mouseover="mouseOver()" ng-mouseout="mouseOut()"></rect>
-    <text class="terminal-label" dy="{{labelDy}}">input</text>
+    <text class="terminal-label" dy="{{labelDy}}">{{label}}</text>
 </g>
 

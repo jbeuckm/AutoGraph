@@ -22,6 +22,7 @@ angular.module('AutoGraph').directive('terminal', function () {
                 if (attributes['type'] == 'input') {
                     scope.dy = -8;
                 }
+                element.find('text').css('visibility', null);
             };
             scope.mouseOut = function(e) {
                 console.log('mouseOut');
@@ -29,8 +30,12 @@ angular.module('AutoGraph').directive('terminal', function () {
                 if (attributes['type'] == 'input') {
                     scope.dy = -4;
                 }
+                element.find('text').css('visibility', 'hidden');
             };
 
+            scope.mouseDown = function(e) {
+
+            };
         }
     };
 

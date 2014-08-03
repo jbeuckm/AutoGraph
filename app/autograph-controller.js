@@ -7,6 +7,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
             switch (cursorModeService.mode) {
                 case 'component':
                     $scope.placeNewComponent(cursorModeService.object, e.x, e.y);
+                    cursorModeService.mode = null;
                     break;
             }
 
