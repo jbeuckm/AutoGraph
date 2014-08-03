@@ -1,0 +1,4 @@
+<div class="toolbar">
+  <i ng-click="clearAutograph()" class="fa fa-bomb"></i>
+</div>
+

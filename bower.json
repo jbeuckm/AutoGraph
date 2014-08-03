@@ -23,6 +23,7 @@
   "dependencies": {
     "angular": "master",
     "angular-mocks": "~1.2.21",
-    "d3": "~3.4.11"
+    "d3": "~3.4.11",
+    "components-font-awesome": "~4.1.0"
   }
 }
