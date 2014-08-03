@@ -11,6 +11,10 @@ describe('AutographController', function(){
         $controller('AutographController', {$scope: scope});
     }));
 
+    it('should generate a component instance from a template', function(){
+        expect(scope.componentFromTemplate).not.toEqual(null);
+    });
+
     it('should place and clear components', function(){
         expect(scope.placed.components).not.toEqual(null);
         scope.placeNewComponent({}, 1, 2);

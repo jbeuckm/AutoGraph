@@ -15,7 +15,7 @@ describe('wire-directive', function(){
 
         scope.placeNewComponent({}, 10, 10);
         scope.placeNewComponent({}, 250, 10);
-        expect(scope.placedComponents).not.toEqual({});
+        expect(scope.placed.components).not.toEqual({});
 
 
     });

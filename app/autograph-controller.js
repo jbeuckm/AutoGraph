@@ -13,9 +13,13 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
             AutographSerializerService.saveAutograph($scope.placed);
         };
 
-        $scope.placeNewComponent = function(modelTemplate, x, y) {
+        $scope.componentFromTemplate = function(componentTemplate) {
+            return JSON.parse(JSON.stringify(componentTemplate));
+        };
 
-            var newComponentModel = JSON.parse(JSON.stringify(modelTemplate));
+        $scope.placeNewComponent = function(componentTemplate, x, y) {
+
+            var newComponentModel = $scope.componentFromTemplate(componentTemplate);
 
             newComponentModel.x = x;
             newComponentModel.y = y;
@@ -25,7 +29,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
 
         $scope.clearComponents = function() {
             $scope.placed.components = {};
-            $scope.wires.components = {};
+            $scope.placed.wires = {};
             AutographSerializerService.saveAutograph($scope.placed);
         }
 

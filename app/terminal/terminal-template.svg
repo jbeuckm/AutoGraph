@@ -1,0 +1,5 @@
+<g class="terminal">
+    <rect height="4" width="15" class="component-terminal nodrag terminal-input" y="{{dy}}"></rect>
+    <text class="terminal-label" dy="{{labelDy}}">input</text>
+</g>
+
