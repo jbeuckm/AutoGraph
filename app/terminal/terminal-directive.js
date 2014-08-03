@@ -22,7 +22,7 @@ angular.module('AutoGraph').directive('terminal', function () {
                 if (attributes['type'] == 'input') {
                     scope.dy = -8;
                 }
-                element.find('text').css('visibility', null);
+                element.find('text').css('visibility', 'visible');
             };
             scope.mouseOut = function(e) {
                 console.log('mouseOut');
