@@ -5,10 +5,11 @@
     </g>
 
     <g id="wire-layer">
+        <wire ng-repeat="wire in placed.wires"></wire>
     </g>
 
     <g id="component-layer">
-        <component ng-repeat="(id, component) in placedComponents" ng-controller="BaseComponentController">
+        <component ng-repeat="(id, component) in placed.components" ng-controller="BaseComponentController">
             <text class="component-text" dy=".9em">{{component.label}}</text>
         </component>
     </g>

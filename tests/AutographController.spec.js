@@ -12,11 +12,11 @@ describe('AutographController', function(){
     }));
 
     it('should place and clear components', function(){
-        expect(scope.placedComponents).not.toEqual(null);
+        expect(scope.placed.components).not.toEqual(null);
         scope.placeNewComponent({}, 1, 2);
-        expect(scope.placedComponents).not.toEqual({});
+        expect(scope.placed.components).not.toEqual({});
         scope.clearComponents();
-        expect(scope.placedComponents).toEqual({});
+        expect(scope.placed.components).toEqual({});
     });
 
 });

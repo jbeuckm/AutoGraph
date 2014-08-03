@@ -1,9 +1,10 @@
 angular.module('AutoGraph').directive('wire', function () {
 
     return {
+        type: 'svg',
         restrict: 'E',
         replace: true,
-        templateUrl: 'wire-template.xml',
+        templateUrl: 'wire/wire-template.svg',
         link: function (scope, element, attributes) {
 
         },

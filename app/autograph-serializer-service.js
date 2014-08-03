@@ -6,12 +6,15 @@ angular.module('AutoGraph').factory('AutographSerializerService', function() {
             if (string) {
                 return JSON.parse(string);
             } else {
-                return {};
+                return {
+                    components: {},
+                    wires: {}
+                };
             }
         },
 
-        saveAutograph: function(placedComponents) {
-            localStorage.setItem('autograph', JSON.stringify(placedComponents));
+        saveAutograph: function(placed) {
+            localStorage.setItem('autograph', JSON.stringify(placed));
         }
     };
 

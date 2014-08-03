@@ -1,0 +1,7 @@
+<g class="wire">
+
+<path stroke="transparent" stroke-width="10" fill="none" cursor="pointer" d="{{lineData}}"/>
+
+<path id="wire-path" class="wire" fill="none" pointer-events="none" d="{{lineData}}"/>
+
+</g>
