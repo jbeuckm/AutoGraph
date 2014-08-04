@@ -1,5 +1,5 @@
-angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc4122', 'cursorModeService', 'AutographSerializerService',
-    function($scope, rfc4122, cursorService, serializer) {
+angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'cursorModeService', 'AutographSerializerService',
+    function($scope, $rootScope, rfc4122, cursorService, serializer) {
 
         $scope.placed = serializer.loadAutograph();
 
@@ -32,7 +32,10 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
             $scope.placed.components = {};
             $scope.placed.wires = {};
             serializer.saveAutograph($scope.placed);
-        }
+        };
+
+        $rootScope.$on('CLEAR_AUTOGRAPH', $scope.clearComponents);
+
 
     }
 ]);

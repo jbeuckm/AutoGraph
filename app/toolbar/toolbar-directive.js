@@ -1,4 +1,4 @@
-angular.module('AutoGraph').directive('toolbar', function($window){
+angular.module('AutoGraph').directive('toolbar', function($rootScope){
 
     return {
         restrict: 'E',
@@ -8,7 +8,7 @@ angular.module('AutoGraph').directive('toolbar', function($window){
 
             scope.clearAutograph = function() {
                 if (confirm("Clear all components?")) {
-
+                    $rootScope.$emit('CLEAR_AUTOGRAPH');
                 }
             };
 
