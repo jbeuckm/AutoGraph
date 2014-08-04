@@ -17,7 +17,6 @@ angular.module('AutoGraph').directive('terminal', function () {
 
             scope.height = 4;
             scope.mouseOver = function(e) {
-                console.log('mouseOver');
                 scope.height = 8;
                 if (attributes['type'] == 'input') {
                     scope.dy = -8;
@@ -25,7 +24,6 @@ angular.module('AutoGraph').directive('terminal', function () {
                 element.find('text').css('visibility', 'visible');
             };
             scope.mouseOut = function(e) {
-                console.log('mouseOut');
                 scope.height = 4;
                 if (attributes['type'] == 'input') {
                     scope.dy = -4;

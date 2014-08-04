@@ -11,7 +11,21 @@ body {
   position: absolute;
 }
 
+.toolbar {
+  background-color: #ddd;
+  position: absolute;
+  right: 0;
+  width: 175px;
+  height: 45px;
+}
+.toolbar i {
+  color: #222;
+  font-size: 24px;
+  margin: 5px;
+}
+
 .component-library-scroller {
+  top: 45px;
   background-color: #333;
   position: absolute;;
   right: 0;
@@ -76,11 +90,3 @@ input {
   background-color: #fff;
 }
 
-.toolbar {
-  background-color: #ddd;
-}
-.toolbar i {
-  color: #222;
-  font-size: 24px;
-  margin: 5px;
-}

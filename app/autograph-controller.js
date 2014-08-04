@@ -1,17 +1,17 @@
 angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc4122', 'cursorModeService', 'AutographSerializerService',
-    function($scope, rfc4122, cursorModeService, AutographSerializerService) {
+    function($scope, rfc4122, cursorService, serializer) {
 
-        $scope.placed = AutographSerializerService.loadAutograph();
+        $scope.placed = serializer.loadAutograph();
 
         $scope.mouseUp = function(e) {
-            switch (cursorModeService.mode) {
+            switch (cursorService.mode) {
                 case 'component':
-                    $scope.placeNewComponent(cursorModeService.object, e.x, e.y);
-                    cursorModeService.mode = null;
+                    $scope.placeNewComponent(cursorService.object, e.x, e.y);
+                    cursorService.mode = null;
                     break;
             }
 
-            AutographSerializerService.saveAutograph($scope.placed);
+            serializer.saveAutograph($scope.placed);
         };
 
         $scope.componentFromTemplate = function(componentTemplate) {
@@ -31,7 +31,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', 'rfc412
         $scope.clearComponents = function() {
             $scope.placed.components = {};
             $scope.placed.wires = {};
-            AutographSerializerService.saveAutograph($scope.placed);
+            serializer.saveAutograph($scope.placed);
         }
 
     }
