@@ -1,8 +1,12 @@
 {
+  "slug": "delay",
   "label": "delay",
   "inputs": [
     { "label": "input" },
-    { "label": "period" }
+    {
+      "label": "period",
+      "default": 1000
+    }
   ],
   "outputs": [
     { "label": "output" }

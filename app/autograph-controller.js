@@ -2,6 +2,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
     function($scope, $rootScope, rfc4122, cursorService, serializer) {
 
         $scope.placed = serializer.loadAutograph();
+        $scope.terminalIndex = {};
 
         $scope.mouseUp = function(e) {
             switch (cursorService.mode) {
@@ -18,7 +19,18 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
         $scope.componentFromTemplate = function(componentTemplate) {
             var object = JSON.parse(JSON.stringify(componentTemplate));
+            object.uuid = rfc4122.newUuid();
 
+            for (var i= 0, l=object.inputs.length; i<l; i++) {
+                object.inputs[i].uuid = rfc4122.newUuid();
+                $scope.terminalIndex[object.inputs[i].uuid] = object.inputs[i];
+            }
+            for (var i= 0, l=object.outputs.length; i<l; i++) {
+                object.outputs[i].uuid = rfc4122.newUuid();
+                $scope.terminalIndex[object.outputs[i].uuid] = object.outputs[i];
+            }
+
+            console.log(object);
             return object;
         };
 
@@ -29,7 +41,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             newComponentModel.x = x;
             newComponentModel.y = y;
 
-            $scope.placed.components[rfc4122.newUuid()] = newComponentModel;
+            $scope.placed.components[newComponentModel.uuid] = (newComponentModel);
         };
 
         $scope.initiateWire = function(originTerminal) {

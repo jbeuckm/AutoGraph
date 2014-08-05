@@ -1,0 +1,10 @@
+{
+  "slug": "button",
+  "label": "button",
+  "inputs": [
+    { "label": "input" }
+  ],
+  "outputs": [
+    { "label": "output" }
+  ]
+}

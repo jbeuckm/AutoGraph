@@ -1,4 +1,5 @@
 {
+  "slug": "counter",
   "label": "counter",
   "inputs": [
     { "label": "tick" }
