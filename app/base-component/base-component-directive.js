@@ -18,12 +18,14 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             element.append(componentDirective);
 
             $timeout(function(){
-                var el = document.getElementById(scope.component.uuid);
-                console.log(el);
-                var bb  = el.getBoundingClientRect();
-            console.log(bb);
-                scope.rectWidth = 2 * padding + bb.width;
-                scope.rectHeight = 2 * padding + bb.height;
+                $timeout(function(){
+                    var el = document.getElementById(scope.component.uuid);
+
+                    var bb  = el.getBoundingClientRect();
+
+                    scope.rectWidth = 2 * padding + bb.width;
+                    scope.rectHeight = 2 * padding + bb.height;
+                }, 0);
             }, 0);
 
             element.on('mousedown', function(event) {
