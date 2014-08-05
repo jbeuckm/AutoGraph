@@ -5,11 +5,11 @@
     { "label": "input" },
     {
       "label": "period",
-      "default": 1000
+      "default": 500
     }
   ],
   "outputs": [
     { "label": "output" }
   ],
-  "period": 0
+  "period": 500
 }

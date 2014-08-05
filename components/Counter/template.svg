@@ -1,1 +1,1 @@
-<text class="component-text" dy="0.9em">{{component.label}}</text>
+<text class="component-text" dy="0.9em">{{component.count}}</text>
