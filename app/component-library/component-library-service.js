@@ -1,27 +1,27 @@
 angular.module('AutoGraph').factory('componentLibraryService', function ($rootScope, $document, $http, $q) {
 
-    function loadDirective(url) {
-        var d = $q.defer();
+    /**
+     * Load the model template and create the directive for given component
+     * @param slug
+     */
+    function loadComponent(path, slug) {
 
-        function onScriptLoad(e) {
-            $rootScope.$apply(function () {
-                d.resolve(e);
+        var model;
+
+        return $http.get(path + slug + '/model.json').then(function(result){
+            model = result.data;
+
+            angular.module('AutoGraph').compileProvider.directive(slug + "ComponentType", function () {
+                return {
+                    type: 'svg',
+                    restrict: 'E',
+                    replace: true,
+                    templateUrl: '../components/' + slug + '/template.svg'
+                };
             });
-        }
 
-        var scriptTag = $document[0].createElement('script');
-        scriptTag.type = 'text/javascript';
-        scriptTag.async = true;
-        scriptTag.src = url;
-        scriptTag.onreadystatechange = function () {
-            if (this.readyState == 'complete') onScriptLoad();
-        };
-        scriptTag.onload = onScriptLoad;
-
-        var s = $document[0].getElementsByTagName('body')[0];
-        s.appendChild(scriptTag);
-
-        return d.promise;
+            return model;
+        });
 
     }
 
@@ -33,28 +33,14 @@ angular.module('AutoGraph').factory('componentLibraryService', function ($rootSc
             return $http.get(path + 'components.json')
                 .then(function (result) {
 
-                    var modelLoadingPromises = [];
+                    var promises = [];
 
-                    for (var j in result.data) {
-                        modelLoadingPromises.push($http.get(path + result.data[j] + '/model.json').then(function (model) {
-
-                            angular.module('AutoGraph').compileProvider.directive(model.data.slug + "ComponentType", function () {
-                                return {
-                                    type: 'svg',
-                                    restrict: 'E',
-                                    replace: true,
-                                    templateUrl: '../components/' + model.data.slug + '/template.svg'
-                                };
-                            });
-
-                            return model;
-                        }));
+                    for (var i in result.data) {
+                        promises.push(loadComponent(path, result.data[i]));
                     }
 
-                    return $q.all(modelLoadingPromises).then(function () {
-                        return arguments[0].map(function (d) {
-                            return d.data;
-                        });
+                    return $q.all(promises).then(function (models) {
+                        return models;
                     });
 
                 });
