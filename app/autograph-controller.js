@@ -35,7 +35,6 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
                 $scope.terminalIndex[object.outputs[i].uuid] = object.outputs[i];
             }
 
-            console.log(object);
             return object;
         };
 
