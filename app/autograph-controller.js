@@ -5,17 +5,21 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
         $scope.mouseUp = function(e) {
             switch (cursorService.mode) {
+
                 case 'component':
                     $scope.placeNewComponent(cursorService.object, e.x, e.y);
                     cursorService.mode = null;
                     break;
+
             }
 
             serializer.saveAutograph($scope.placed);
         };
 
         $scope.componentFromTemplate = function(componentTemplate) {
-            return JSON.parse(JSON.stringify(componentTemplate));
+            var object = JSON.parse(JSON.stringify(componentTemplate));
+
+            return object;
         };
 
         $scope.placeNewComponent = function(componentTemplate, x, y) {
@@ -26,6 +30,10 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             newComponentModel.y = y;
 
             $scope.placed.components[rfc4122.newUuid()] = newComponentModel;
+        };
+
+        $scope.initiateWire = function(originTerminal) {
+
         };
 
         $scope.clearComponents = function() {

@@ -31,9 +31,14 @@ angular.module('AutoGraph').directive('terminal', function () {
                 element.find('text').css('visibility', 'hidden');
             };
 
-            scope.mouseDown = function(e) {
+            scope.mouseDown = function(event) {
+
+                scope.initiateWire(this);
+                event.stopPropagation();
 
             };
+
+
         }
     };
 

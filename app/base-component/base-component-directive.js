@@ -30,7 +30,7 @@ angular.module('AutoGraph').directive('component', function($document){
             }
 
             scope.rectWidth = 100;
-            scope.rectHeight = 30;
+            scope.rectHeight = 28;
         }
 
     };
