@@ -1,9 +1,12 @@
-angular.module('AutoGraph').factory('componentLibraryService', function($rootScope, $document, $http, $q) {
+angular.module('AutoGraph').factory('componentLibraryService', function ($rootScope, $document, $http, $q) {
 
-    function loadDirective(url){
+    function loadDirective(url) {
         var d = $q.defer();
+
         function onScriptLoad(e) {
-            $rootScope.$apply(function() { d.resolve(e); });
+            $rootScope.$apply(function () {
+                d.resolve(e);
+            });
         }
 
         var scriptTag = $document[0].createElement('script');
@@ -25,43 +28,35 @@ angular.module('AutoGraph').factory('componentLibraryService', function($rootSco
 
     return {
 
-        loadComponentLibrary: function(path) {
+        loadComponentLibrary: function (path) {
 
             return $http.get(path + 'components.json')
-                .then(function(result) {
-/*
-                    var directiveLoadingPromises = [];
+                .then(function (result) {
 
-                    for (var i in result.data) {
-                        directiveLoadingPromises.push(loadDirective(path + result.data[i] + '/directive.js'));
+                    var modelLoadingPromises = [];
+
+                    for (var j in result.data) {
+                        modelLoadingPromises.push($http.get(path + result.data[j] + '/model.json').then(function (model) {
+
+                            angular.module('AutoGraph').compileProvider.directive(model.data.slug + "ComponentType", function () {
+                                return {
+                                    type: 'svg',
+                                    restrict: 'E',
+                                    replace: true,
+                                    templateUrl: '../components/' + model.data.slug + '/template.svg'
+                                };
+                            });
+
+                            return model;
+                        }));
                     }
 
-                    return $q.all(directiveLoadingPromises).then(function(){
-*/
-                        var modelLoadingPromises = [];
-
-                        for (var j in result.data) {
-                            modelLoadingPromises.push($http.get(path + result.data[j] + '/model.json').then(function(model){
-
-                                angular.module('AutoGraph').compileProvider.directive(model.data.slug+"ComponentType", function(){
-                                    return {
-                                        type: 'svg',
-                                        restrict: 'E',
-                                        replace: true,
-                                        templateUrl: '../components/'+model.data.slug+'/template.svg'
-                                    };
-                                });
-
-                                return model;
-                            }));
-                        }
-
-                        return $q.all(modelLoadingPromises).then(function(){
-                            return arguments[0].map(function(d){ return d.data; });
+                    return $q.all(modelLoadingPromises).then(function () {
+                        return arguments[0].map(function (d) {
+                            return d.data;
                         });
-/*
                     });
-*/
+
                 });
 
         }
