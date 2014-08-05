@@ -17,7 +17,7 @@ describe('AutographController', function(){
 
     it('should place and clear components', function(){
         expect(scope.placed.components).not.toEqual(null);
-        scope.placeNewComponent({}, 1, 2);
+        scope.placeNewComponent({slug:"counter"}, 1, 2);
         expect(scope.placed.components).not.toEqual({});
         scope.clearComponents();
         expect(scope.placed.components).toEqual({});

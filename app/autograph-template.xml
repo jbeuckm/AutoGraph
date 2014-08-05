@@ -9,7 +9,7 @@
     </g>
 
     <g id="component-layer">
-        <component ng-repeat="(id, component) in placed.components" ng-controller="BaseComponentController">
+        <component ng-repeat="(id, component) in placed.components" type="{{component.slug}}">
             <text class="component-text" dy=".9em">{{component.label}}</text>
         </component>
     </g>

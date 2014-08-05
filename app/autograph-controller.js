@@ -21,10 +21,13 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             var object = JSON.parse(JSON.stringify(componentTemplate));
             object.uuid = rfc4122.newUuid();
 
+            if (object.inputs)
             for (var i= 0, l=object.inputs.length; i<l; i++) {
                 object.inputs[i].uuid = rfc4122.newUuid();
                 $scope.terminalIndex[object.inputs[i].uuid] = object.inputs[i];
             }
+
+            if (object.outputs)
             for (var i= 0, l=object.outputs.length; i<l; i++) {
                 object.outputs[i].uuid = rfc4122.newUuid();
                 $scope.terminalIndex[object.outputs[i].uuid] = object.outputs[i];
