@@ -1,8 +1,11 @@
-angular.module('AutoGraph').controller('ComponentLibraryController', ['$scope', 'componentLibraryService', 'cursorModeService', function($scope, componentLibraryService, cursorModeService) {
+angular.module('AutoGraph').controller('ComponentLibraryController', ['$scope', '$rootScope', 'componentLibraryService', 'cursorModeService',
+    function($scope, $rootScope, componentLibraryService, cursorModeService) {
 
     componentLibraryService.loadComponentLibrary('../components/').then(function(data){
 
         $scope.components = data;
+
+        $rootScope.$emit('COMPONENT_LIBRARY_LOADED');
 
     });
 

@@ -1,7 +1,9 @@
 angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'cursorModeService', 'AutographSerializerService',
     function($scope, $rootScope, rfc4122, cursorService, serializer) {
 
-        $scope.placed = serializer.loadAutograph();
+        $rootScope.$on('COMPONENT_LIBRARY_LOADED', function(){
+            $scope.placed = serializer.loadAutograph();
+        });
         $scope.terminalIndex = {};
 
         $scope.mouseUp = function(e) {

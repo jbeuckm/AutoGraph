@@ -1,4 +1,4 @@
-angular.module('AutoGraph').directive('component', function($document, $q){
+angular.module('AutoGraph').directive('component', function($document, $compile){
 
     return {
         type: 'svg',
@@ -8,6 +8,13 @@ angular.module('AutoGraph').directive('component', function($document, $q){
         templateUrl: 'base-component/base-component-template.svg',
 
         link: function (scope, element, attributes, ctrl, transclude) {
+
+            var component = angular.element(document.createElement(attributes['type']+'-component'));
+            var el = $compile( component )( scope );
+
+            //where do you want to place the new element?
+            element.append(el);
+
 
             element.on('mousedown', function(event) {
                 // Prevent default dragging of selected content

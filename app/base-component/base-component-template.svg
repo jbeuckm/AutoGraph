@@ -2,9 +2,6 @@
 
     <rect class="component-rect" width="{{rectWidth}}" height="{{rectHeight}}"></rect>
 
-    <g transform="translate(4,4)" ng-transclude>
-    </g>
-
     <g>
         <terminal transform="translate({{20*$index}} 0)" type="input" ng-repeat="terminal in component.inputs"></terminal>
     </g>
