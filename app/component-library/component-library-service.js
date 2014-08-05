@@ -29,7 +29,7 @@ angular.module('AutoGraph').factory('componentLibraryService', function($rootSco
 
             return $http.get(path + 'components.json')
                 .then(function(result) {
-
+/*
                     var directiveLoadingPromises = [];
 
                     for (var i in result.data) {
@@ -37,19 +37,33 @@ angular.module('AutoGraph').factory('componentLibraryService', function($rootSco
                     }
 
                     return $q.all(directiveLoadingPromises).then(function(){
-
+*/
                         var modelLoadingPromises = [];
 
                         for (var j in result.data) {
-                            modelLoadingPromises.push($http.get(path + result.data[j] + '/model.json'));
+                            modelLoadingPromises.push($http.get(path + result.data[j] + '/model.json').then(function(model){
+
+                                angular.module('AutoGraph').compileProvider.directive(model.data.slug+"ComponentType", function(){
+                                    return {
+                                        type: 'svg',
+                                        restrict: 'E',
+                                        replace: true,
+                                        templateUrl: '../components/'+model.data.slug+'/template.svg'
+                                    };
+                                });
+
+                                return model;
+                            }));
                         }
 
                         return $q.all(modelLoadingPromises).then(function(){
                             return arguments[0].map(function(d){ return d.data; });
                         });
+/*
                     });
-
+*/
                 });
+
         }
 
     };

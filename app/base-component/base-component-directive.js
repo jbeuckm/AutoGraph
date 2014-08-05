@@ -11,7 +11,7 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
 
             var padding = 4;
 
-            var componentDirective = angular.element(document.createElement(attributes['type']+'-component'));
+            var componentDirective = angular.element(document.createElement(attributes['type']+'-component-type'));
             componentDirective.attr('id', scope.component.uuid);
             componentDirective.attr('transform', 'translate('+padding+','+padding+')');
             $compile( componentDirective )( scope );
