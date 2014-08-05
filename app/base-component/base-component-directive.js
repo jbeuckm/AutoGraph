@@ -9,12 +9,18 @@ angular.module('AutoGraph').directive('component', function($document, $compile)
 
         link: function (scope, element, attributes, ctrl, transclude) {
 
-            var component = angular.element(document.createElement(attributes['type']+'-component'));
-            var el = $compile( component )( scope );
+            var padding = 4;
 
-            //where do you want to place the new element?
-            element.append(el);
+            var componentDirective = angular.element(document.createElement(attributes['type']+'-component'));
+            componentDirective.attr('id', scope.component.uuid);
+            componentDirective.attr('transform', 'translate('+padding+','+padding+')');
+            $compile( componentDirective )( scope );
+            element.append(componentDirective);
 
+            var el = document.getElementById(scope.component.uuid);
+            console.log(el);
+//            var bb  = el.getBBox();
+//            console.log(bb);
 
             element.on('mousedown', function(event) {
                 // Prevent default dragging of selected content

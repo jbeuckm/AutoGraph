@@ -1,4 +1,4 @@
-angular.module('AutoGraph').directive('delayComponent', function(){
+angular.module('AutoGraph').compileProvider.directive('delayComponent', function(){
 
     return {
         type: 'svg',
@@ -6,7 +6,7 @@ angular.module('AutoGraph').directive('delayComponent', function(){
         replace: true,
 
         link: function (scope, element, attributes, ctrl, transclude) {
-            alert("delay linked!");
+
         }
     };
 

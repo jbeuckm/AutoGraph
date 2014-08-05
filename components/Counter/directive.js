@@ -1,4 +1,4 @@
-angular.module('AutoGraph').directive('counterComponent', function(){
+angular.module('AutoGraph').compileProvider.directive('counterComponent', function(){
 
     return {
         type: 'svg',
@@ -6,7 +6,7 @@ angular.module('AutoGraph').directive('counterComponent', function(){
         replace: true,
 
         link: function (scope, element, attributes, ctrl, transclude) {
-            alert("counter linked!");
+
         }
     };
 
