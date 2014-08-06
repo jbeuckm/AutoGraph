@@ -1,8 +1,8 @@
 angular.module('AutoGraph').controller('TerminalController', ['$scope', 'rfc4122', function($scope, rfc4122) {
 
-    console.log('terminal');
-    console.log($scope);
+    $scope.terminal.uuid = rfc4122.newUuid();
+    $scope.terminalIndex[$scope.terminal.uuid] = this;
 
-//    $scope.receiveTick($scope.terminal.label);
+    $scope.receiveTick();
 
 }]);

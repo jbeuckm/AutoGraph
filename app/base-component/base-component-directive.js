@@ -5,6 +5,7 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
         restrict: 'E',
         replace: true,
         templateUrl: 'base-component/base-component-template.svg',
+        controller: 'BaseComponentController',
 
         link: function (scope, element, attributes, ctrl, transclude) {
 
