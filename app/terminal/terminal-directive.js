@@ -5,6 +5,8 @@ angular.module('AutoGraph').directive('terminal', function () {
         restrict: 'E',
         replace: true,
         templateUrl: 'terminal/terminal-template.svg',
+        controller: 'TerminalController',
+
         link: function (scope, element, attributes) {
 
             if (attributes['type'] == 'input') {

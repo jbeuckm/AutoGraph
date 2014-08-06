@@ -5,6 +5,8 @@ angular.module('AutoGraph').directive('autograph', function($window){
         restrict: 'E',
         replace: true,
         templateUrl: 'autograph-template.xml',
+        controller: 'AutographController',
+
         link: function(scope, element, attributes) {
 
             scope.initializeWindowSize = function() {

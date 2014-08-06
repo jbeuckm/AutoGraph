@@ -3,5 +3,8 @@
  */
 angular.module('AutoGraph').controller('BaseComponentController', ['$scope', 'rfc4122', function($scope, rfc4122) {
 
+    $scope.receiveTick = function(input) {
+
+    };
 
 }]);
