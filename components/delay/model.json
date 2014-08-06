@@ -4,8 +4,7 @@
   "inputs": [
     { "label": "input" },
     {
-      "label": "period",
-      "default": 500
+      "label": "period"
     }
   ],
   "outputs": [

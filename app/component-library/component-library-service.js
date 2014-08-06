@@ -6,22 +6,38 @@ angular.module('AutoGraph').factory('componentLibraryService', function ($rootSc
      */
     function loadComponent(path, slug) {
 
-        var model;
+        var d = $q.defer();
 
-        return $http.get(path + slug + '/model.json').then(function(result){
-            model = result.data;
+        $http.get(path + slug + '/model.json')
+            .then(function(result){
+                var model = result.data;
 
-            angular.module('AutoGraph').compileProvider.directive(slug + "ComponentType", function () {
-                return {
-                    type: 'svg',
-                    restrict: 'E',
-                    replace: true,
-                    templateUrl: '../components/' + slug + '/template.svg'
-                };
+                var templateUrl = path + slug + '/template.svg';
+
+                $http.get(templateUrl)
+                    .catch(function(err){
+                        templateUrl = "base-component/default-template.svg";
+                    })
+                    .finally(function(){
+
+                        angular.module('AutoGraph').compileProvider.directive(slug + "ComponentType", function () {
+                            return {
+                                type: 'svg',
+                                restrict: 'E',
+                                replace: true,
+                                templateUrl: templateUrl
+                            };
+                        });
+
+                        d.resolve(model);
+                    });
+
+            })
+            .catch(function(err){
+                d.reject(err);
             });
 
-            return model;
-        });
+        return d.promise;
 
     }
 

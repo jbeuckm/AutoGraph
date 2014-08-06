@@ -17,17 +17,6 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             $compile( componentDirective )( scope );
             element.append(componentDirective);
 
-            $timeout(function(){
-                $timeout(function(){
-                    var el = document.getElementById(scope.component.uuid);
-
-                    var bb  = el.getBoundingClientRect();
-
-                    scope.rectWidth = 2 * padding + bb.width;
-                    scope.rectHeight = 2 * padding + bb.height;
-                }, 0);
-            }, 0);
-
             element.on('mousedown', function(event) {
                 // Prevent default dragging of selected content
                 event.preventDefault();
@@ -47,6 +36,15 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
                 $document.off('mousemove', mousemove);
                 $document.off('mouseup', mouseup);
             }
+
+            $timeout(function(){
+                var el = document.getElementById(scope.component.uuid);
+
+                var bb  = el.getBoundingClientRect();
+
+                scope.rectWidth = 2 * padding + bb.width;
+                scope.rectHeight = 2 * padding + bb.height;
+            }, 0);
 
         }
 

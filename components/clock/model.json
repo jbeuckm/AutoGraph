@@ -1,0 +1,11 @@
+{
+  "slug": "clock",
+  "label": "clock",
+  "inputs": [
+    { "label": "toggle" },
+    { "label": "period" }
+  ],
+  "outputs": [
+    { "label": "output" }
+  ]
+}
