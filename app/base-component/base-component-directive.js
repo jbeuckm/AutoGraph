@@ -4,7 +4,6 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
         type: 'svg',
         restrict: 'E',
         replace: true,
-        transclude: true,
         templateUrl: 'base-component/base-component-template.svg',
 
         link: function (scope, element, attributes, ctrl, transclude) {

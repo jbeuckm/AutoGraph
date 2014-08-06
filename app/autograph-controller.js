@@ -45,7 +45,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             newComponentModel.x = x;
             newComponentModel.y = y;
 
-            $scope.placed.components[newComponentModel.uuid] = (newComponentModel);
+            $scope.placed.components[newComponentModel.uuid] = newComponentModel;
         };
 
         $scope.initiateWire = function(originTerminal) {
@@ -53,8 +53,10 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
         };
 
         $scope.clearComponents = function() {
-            $scope.placed.components = {};
-            $scope.placed.wires = {};
+            $scope.placed = {
+                components: {},
+                wires: {}
+            };
             serializer.saveAutograph($scope.placed);
         };
 
