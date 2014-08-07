@@ -3,6 +3,9 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
         $rootScope.$on('COMPONENT_LIBRARY_LOADED', function(){
             $scope.placed = serializer.loadAutograph();
+            for (var key in $scope.placed.components) {
+                addTerminalsToIndex($scope.placed.components[key]);
+            }
         });
         $scope.terminalIndex = {};
 
@@ -37,6 +40,18 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
             return object;
         };
+
+        function addTerminalsToIndex(object) {
+            if (object.inputs)
+                for (var i= 0, l=object.inputs.length; i<l; i++) {
+                    $scope.terminalIndex[object.inputs[i].uuid] = object.inputs[i];
+                }
+
+            if (object.outputs)
+                for (var i= 0, l=object.outputs.length; i<l; i++) {
+                    $scope.terminalIndex[object.outputs[i].uuid] = object.outputs[i];
+                }
+        }
 
         $scope.placeNewComponent = function(componentTemplate, x, y) {
 
