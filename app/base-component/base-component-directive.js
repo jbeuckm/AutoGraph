@@ -38,15 +38,38 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             }
 
 
-            element.on("DOMSubtreeModified", function(e){
 
-                var el = document.getElementById(scope.component.uuid);
-                var bb  = el.getBoundingClientRect();
+            var el = document.getElementById(scope.component.uuid);
 
-                scope.rectWidth = 2 * padding + bb.width;
-                scope.rectHeight = 2 * padding + bb.height;
+            var observer = new MutationObserver(function(mutations) {
+
+                console.log('observed');
+
+                mutations.forEach(function(mutation) {
+                    console.log(mutation.type);
+                });
             });
+            console.log(observer);
 
+            var config = {
+//                attributes: true,
+//                childList: true,
+//                characterData: true,
+                subtree: true
+            };
+
+            observer.observe(el, config);
+
+
+            /*
+                        element.on("DOMSubtreeModified", function(e){
+
+                            var bb  = el.getBoundingClientRect();
+
+                            scope.rectWidth = 2 * padding + bb.width;
+                            scope.rectHeight = 2 * padding + bb.height;
+                        });
+            */
 
         }
 
