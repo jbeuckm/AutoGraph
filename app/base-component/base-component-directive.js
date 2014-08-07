@@ -11,12 +11,6 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
 
             var padding = 4;
 
-            var componentDirective = angular.element(document.createElement(attributes['type']+'-component-type'));
-            componentDirective.attr('id', scope.component.uuid);
-            componentDirective.attr('transform', 'translate('+padding+','+padding+')');
-            $compile( componentDirective )( scope );
-            element.append(componentDirective);
-
             element.on('mousedown', function(event) {
                 // Prevent default dragging of selected content
                 event.preventDefault();
@@ -38,15 +32,23 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             }
 
 
+            var elementId = scope.component.slug+'-'+scope.component.uuid;
+
             element.on("DOMSubtreeModified", function(e){
 
-                var el = document.getElementById(scope.component.uuid);
+                var el = document.getElementById(elementId);
                 var bb  = el.getBoundingClientRect();
 
                 scope.rectWidth = 2 * padding + bb.width;
                 scope.rectHeight = 2 * padding + bb.height;
             });
 
+
+            var componentDirective = angular.element(document.createElement(attributes['type']+'-component-type'));
+            componentDirective.attr('id', elementId);
+            componentDirective.attr('transform', 'translate('+padding+','+padding+')');
+            $compile( componentDirective )( scope );
+            element.append(componentDirective);
 
         }
 

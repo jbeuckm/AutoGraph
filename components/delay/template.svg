@@ -1,1 +1,1 @@
-<text class="component-text" dy="0.9em">wait {{component.period}}ms</text>
+<text class="component-text" dy="0.9em">delay {{component.period}}ms</text>

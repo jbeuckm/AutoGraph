@@ -8,33 +8,56 @@ angular.module('AutoGraph').factory('componentLibraryService', function ($rootSc
 
         var d = $q.defer();
 
-        $http.get(path + slug + '/model.json')
+        var componentPath = path + slug + '/';
+
+        var files = {
+            model: forceLoadResolve(componentPath + 'model.json'),
+            template: forceLoadResolve(componentPath + 'template.svg'),
+            controller: forceLoadResolve(componentPath + 'controller.js')
+        };
+
+        $q.all(files).then(function(results) {
+                console.log('component files attempted');
+console.log(results);
+
+            var templateUrl = "base-component/default-template.svg";
+            if (results.template) {
+                templateUrl = componentPath + 'template.svg';
+            }
+
+            angular.module('AutoGraph').compileProvider.directive(slug + "ComponentType", function () {
+                return {
+                    type: 'svg',
+                    restrict: 'E',
+                    replace: true,
+                    templateUrl: templateUrl
+                };
+            });
+
+            d.resolve(results.model);
+        })
+        .catch(function(err){
+            d.reject(err);
+        });
+
+        return d.promise;
+    }
+
+    /**
+     * Force a resolution (null if error) so that Q.all([]) can attempt to load all files.
+     * @param path
+     * @return {*}
+     */
+    function forceLoadResolve(path) {
+
+        var d = $q.defer();
+
+        $http.get(path)
             .then(function(result){
-                var model = result.data;
-
-                var templateUrl = path + slug + '/template.svg';
-
-                $http.get(templateUrl)
-                    .catch(function(err){
-                        templateUrl = "base-component/default-template.svg";
-                    })
-                    .finally(function(){
-
-                        angular.module('AutoGraph').compileProvider.directive(slug + "ComponentType", function () {
-                            return {
-                                type: 'svg',
-                                restrict: 'E',
-                                replace: true,
-                                templateUrl: templateUrl
-                            };
-                        });
-
-                        d.resolve(model);
-                    });
-
+                d.resolve(result.data);
             })
             .catch(function(err){
-                d.reject(err);
+                d.resolve(null);
             });
 
         return d.promise;
