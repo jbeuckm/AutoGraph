@@ -28,8 +28,6 @@ console.log(results);
             var brain = null;
             if (results.brain) {
                 brain = new (eval(results.brain))();
-                console.log(brain.link);
-                brain.link();
             }
 
             angular.module('AutoGraph').compileProvider.directive(slug + "ComponentType", function () {
