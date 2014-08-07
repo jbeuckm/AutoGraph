@@ -9,25 +9,29 @@ angular.module('AutoGraph').directive('terminal', function () {
 
         link: function (scope, element, attributes) {
 
-            if (attributes['type'] == 'input') {
+            scope.direction = attributes['type'];
+
+            if (scope.direction == 'input') {
                 scope.dy = -4;
                 scope.labelDy = -16;
             } else {
                 scope.dy = 0;
                 scope.labelDy = 32;
+
+                scope.$on('tick', scope.sendTick);
             }
 
             scope.height = 4;
             scope.mouseOver = function(e) {
                 scope.height = 8;
-                if (attributes['type'] == 'input') {
+                if (scope.direction == 'input') {
                     scope.dy = -8;
                 }
                 element.find('text').css('visibility', 'visible');
             };
             scope.mouseOut = function(e) {
                 scope.height = 4;
-                if (attributes['type'] == 'input') {
+                if (scope.direction == 'input') {
                     scope.dy = -4;
                 }
                 element.find('text').css('visibility', 'hidden');

@@ -1,9 +1,8 @@
-angular.module('AutoGraph').controller('TerminalController', ['$scope', 'rfc4122', function($scope, rfc4122) {
+angular.module('AutoGraph').controller('TerminalController', ['$scope', function($scope) {
 
-    function sendTick() {
-        console.log($scope.terminalIndex);
+    $scope.sendTick = function() {
+        console.log($scope.terminalIndex[$scope.terminal.uuid]);
     }
 
-    $scope.$on('tick', sendTick);
 
 }]);
