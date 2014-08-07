@@ -13,7 +13,7 @@ angular.module('AutoGraph').factory('componentLibraryService', function ($rootSc
         var files = {
             model: forceLoadResolve(componentPath + 'model.json'),
             template: forceLoadResolve(componentPath + 'template.svg'),
-            controller: forceLoadResolve(componentPath + 'controller.js')
+            brain: forceLoadResolve(componentPath + 'brain.js')
         };
 
         $q.all(files).then(function(results) {
@@ -25,12 +25,21 @@ console.log(results);
                 templateUrl = componentPath + 'template.svg';
             }
 
+            var brain = null;
+            if (results.brain) {
+                brain = new (eval(results.brain))();
+                console.log(brain.link);
+                brain.link();
+            }
+
             angular.module('AutoGraph').compileProvider.directive(slug + "ComponentType", function () {
                 return {
                     type: 'svg',
                     restrict: 'E',
                     replace: true,
-                    templateUrl: templateUrl
+                    templateUrl: templateUrl,
+                    link: (brain)? brain.link : null,
+                    controller: (brain)? brain.controller : null
                 };
             });
 
