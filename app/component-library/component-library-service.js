@@ -18,7 +18,6 @@ angular.module('AutoGraph').factory('componentLibraryService', function ($rootSc
 
         $q.all(files).then(function(results) {
                 console.log('component files attempted');
-console.log(results);
 
             var templateUrl = "base-component/default-template.svg";
             if (results.template) {
