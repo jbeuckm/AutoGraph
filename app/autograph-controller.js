@@ -44,18 +44,6 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             return object;
         };
 
-        function addTerminalsToIndex(object) {
-            if (object.inputs)
-                for (var i= 0, l=object.inputs.length; i<l; i++) {
-                    $scope.terminalElementIndex[object.inputs[i].uuid] = object.inputs[i];
-                }
-
-            if (object.outputs)
-                for (var i= 0, l=object.outputs.length; i<l; i++) {
-                    $scope.terminalElementIndex[object.outputs[i].uuid] = object.outputs[i];
-                }
-        }
-
         $scope.placeNewComponent = function(componentTemplate, x, y) {
 
             var newComponentModel = $scope.componentFromTemplate(componentTemplate);
@@ -71,6 +59,8 @@ console.log('initiate wire');
             $scope.tempTerminal = {
                 uuid: rfc4122.newUuid()
             };
+
+            $scope.terminalElementIndex[$scope.tempTerminal.uuid] = $scope.tempTerminal;
 
             $scope.newWire = {
                 uuid: rfc4122.newUuid(),
