@@ -57,7 +57,10 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
         $scope.initiateWire = function(originTerminal) {
 console.log('initiate wire');
             $scope.tempTerminal = {
-                uuid: rfc4122.newUuid()
+                uuid: rfc4122.newUuid(),
+                getCenter: function() {
+                    return this.center;
+                }
             };
 
             $scope.terminalElementIndex[$scope.tempTerminal.uuid] = $scope.tempTerminal;
@@ -80,12 +83,14 @@ console.log('complete wire');
         };
         $scope.mouseMove = function(e) {
             if (cursorService.mode == "terminal") {
-                $scope.tempTerminal.x = e.clientX;
-                $scope.tempTerminal.y = e.clientY;
+                $scope.tempTerminal.center = {
+                    x: e.clientX,
+                    y: e.clientY
+                };
             }
         };
 
-            $scope.clearComponents = function() {
+        $scope.clearComponents = function() {
             $scope.placed = {
                 components: {},
                 wires: {}
