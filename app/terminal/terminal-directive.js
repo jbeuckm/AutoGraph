@@ -9,6 +9,14 @@ angular.module('AutoGraph').directive('terminal', function () {
 
         link: function (scope, element, attributes) {
 
+            element[0].getCenter = function() {
+                var trans = this.getTransformToElement(scope.svg);
+                return {
+                    x: trans.e,
+                    y: trans.f
+                };
+            };
+
             scope.terminalElementIndex[scope.terminal.uuid] = element[0];
 
             scope.direction = attributes['type'];
@@ -47,7 +55,6 @@ angular.module('AutoGraph').directive('terminal', function () {
                 scope.completeWire(scope.terminal);
                 event.stopPropagation();
             };
-
 
         }
     };
