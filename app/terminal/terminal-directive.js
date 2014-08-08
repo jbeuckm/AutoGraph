@@ -12,8 +12,8 @@ angular.module('AutoGraph').directive('terminal', function () {
             element[0].getCenter = function() {
                 var trans = this.getTransformToElement(scope.svg);
                 return {
-                    x: trans.e,
-                    y: trans.f
+                    x: trans.e + 7,
+                    y: trans.f + ((scope.direction == 'input')? -2 : 2)
                 };
             };
 
