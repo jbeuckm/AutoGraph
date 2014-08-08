@@ -83,7 +83,7 @@ console.log('initiate wire');
 
             $scope.placed.wires[$scope.newWire.uuid] = $scope.newWire;
 
-            cursorService.mode = "terminal";
+            cursorService.mode = "wire";
         };
         $scope.completeWire = function(destinationTerminal) {
 console.log('complete wire');
