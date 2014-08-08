@@ -8,7 +8,7 @@
     };
 
     this.controller = function($scope) {
-        console.log($scope);
+//        console.log($scope);
     };
 
 });

@@ -1,13 +1,13 @@
-<g class="component" transform="translate({{component.x}} {{component.y}})">
+<g class="component" ng-attr-transform="translate({{component.x}} {{component.y}})">
 
-    <rect class="component-rect" width="{{rectWidth}}" height="{{rectHeight}}"></rect>
+    <rect class="component-rect" ng-attr-width="{{rectWidth}}" ng-attr-height="{{rectHeight}}"></rect>
 
     <g>
-        <terminal transform="translate({{20*$index}} 0)" type="input" ng-repeat="terminal in component.inputs"></terminal>
+        <terminal ng-attr-transform="translate({{20*$index}} 0)" type="input" ng-repeat="terminal in component.inputs"></terminal>
     </g>
 
-    <g transform="translate(0, {{rectHeight}})">
-        <terminal transform="translate({{20*$index}} 0)" type="output" ng-repeat="terminal in component.outputs"></terminal>
+    <g ng-attr-transform="translate(0, {{rectHeight}})">
+        <terminal ng-attr-transform="translate({{20*$index}} 0)" type="output" ng-repeat="terminal in component.outputs"></terminal>
     </g>
 
 </g>

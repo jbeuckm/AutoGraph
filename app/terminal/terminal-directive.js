@@ -38,10 +38,12 @@ angular.module('AutoGraph').directive('terminal', function () {
             };
 
             scope.mouseDown = function(event) {
-
-                scope.initiateWire(this);
+                scope.initiateWire(scope.terminal);
                 event.stopPropagation();
-
+            };
+            scope.mouseUp = function(event) {
+                scope.completeWire(scope.terminal);
+                event.stopPropagation();
             };
 
 

@@ -6,7 +6,16 @@ angular.module('AutoGraph').directive('wire', function () {
         replace: true,
         templateUrl: 'wire/wire-template.svg',
         link: function (scope, element, attributes) {
-
+            scope.lineData = "M150 0 L75 200 L225 200 Z";
+/*
+            console.log(scope.wire);
+            scope.$watch(scope.wire.origin, function(e){
+console.log(e);
+            });
+            scope.$watch(scope.wire.destination, function(e){
+console.log(e);
+            });
+*/
         },
 
 

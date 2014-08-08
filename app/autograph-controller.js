@@ -17,6 +17,12 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
                     cursorService.mode = null;
                     break;
 
+                case 'wire':
+                    console.log('cancel wire');
+                    $scope.placed.wires[$scope.newWire.uuid] = null;
+                    cursorService.mode = null;
+                    break;
+
             }
 
             serializer.saveAutograph($scope.placed);
@@ -64,10 +70,35 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
         };
 
         $scope.initiateWire = function(originTerminal) {
+console.log('initiate wire');
+            $scope.tempTerminal = {
+                uuid: rfc4122.newUuid()
+            };
 
+            $scope.newWire = {
+                uuid: rfc4122.newUuid(),
+                origin: originTerminal.uuid,
+                destination: $scope.tempTerminal.uuid
+            };
+
+            $scope.placed.wires[$scope.newWire.uuid] = $scope.newWire;
+
+            cursorService.mode = "terminal";
+        };
+        $scope.completeWire = function(destinationTerminal) {
+console.log('complete wire');
+            $scope.newWire.destination = destinationTerminal.uuid;
+
+            cursorService.mode = null;
+        };
+        $scope.mouseMove = function(e) {
+            if (cursorService.mode == "terminal") {
+                $scope.tempTerminal.x = e.clientX;
+                $scope.tempTerminal.y = e.clientY;
+            }
         };
 
-        $scope.clearComponents = function() {
+            $scope.clearComponents = function() {
             $scope.placed = {
                 components: {},
                 wires: {}
