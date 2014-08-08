@@ -9,6 +9,8 @@ angular.module('AutoGraph').directive('terminal', function () {
 
         link: function (scope, element, attributes) {
 
+            scope.terminalElementIndex[scope.terminal.uuid] = element[0];
+
             scope.direction = attributes['type'];
 
             if (scope.direction == 'input') {

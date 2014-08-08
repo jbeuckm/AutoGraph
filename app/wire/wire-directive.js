@@ -8,11 +8,17 @@ angular.module('AutoGraph').directive('wire', function () {
         link: function (scope, element, attributes) {
             scope.lineData = "M150 0 L75 200 L225 200 Z";
 
-            console.log(scope.wire);
-/*
-            scope.$watch(scope.wire.origin, function(e){
-console.log(e);
+            scope.$watch(scope.wire, function(e){
+                if (scope.wire) {
+                    var origin = scope.terminalElementIndex[scope.wire.origin];
+                    var destination = scope.terminalElementIndex[scope.wire.destination];
+                    console.log('origin:');
+                    console.log(origin);
+                    console.log('destination:');
+                    console.log(destination);
+                }
             });
+/*
             scope.$watch(scope.wire.destination, function(e){
 console.log(e);
             });

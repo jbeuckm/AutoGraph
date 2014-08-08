@@ -1,4 +1,4 @@
-<g class="terminal" ng-mousedown="mouseDown($event)" ng-mouseup="mouseUp($event)">
+<g class="terminal" ng-attr-transform="translate({{20*$index}} 0)" ng-mousedown="mouseDown($event)" ng-mouseup="mouseUp($event)">
     <rect ng-attr-height="{{height}}" width="15" class="component-terminal nodrag terminal-input" ng-attr-y="{{dy}}" ng-mouseover="mouseOver()" ng-mouseout="mouseOut()"></rect>
     <text class="terminal-label" ng-attr-dy="{{labelDy}}">{{terminal.label}}</text>
 </g>
