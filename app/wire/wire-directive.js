@@ -6,7 +6,6 @@ angular.module('AutoGraph').directive('wire', function () {
         replace: true,
         templateUrl: 'wire/wire-template.svg',
         link: function (scope, element, attributes) {
-            scope.lineData = "M150 0 L75 200 L225 200 Z";
 
             scope.$watch(scope.wire, function(){
                 if (scope.wire) {
@@ -14,15 +13,15 @@ angular.module('AutoGraph').directive('wire', function () {
                     var destination = scope.terminalElementIndex[scope.wire.destination];
                     console.log('origin:');
                     console.log(origin);
-
-
-                    var trans = origin.getCenter();
-                    scope.lineData = "M0 0 L"+trans.x+" "+trans.y;
-
                     console.log('destination:');
                     console.log(destination);
+
+                    var originCenter = origin.getCenter();
+                    var destinationCenter = destination.getCenter();
+
+                    scope.lineData = "M"+originCenter.x+" "+originCenter.y+" L"+destinationCenter.x+" "+destinationCenter.y;
                 }
-            });
+            }, true);
 
         },
 

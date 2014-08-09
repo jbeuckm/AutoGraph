@@ -37,6 +37,9 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             element.on("DOMSubtreeModified", function(e){
 
                 var el = document.getElementById(elementId);
+                if (!el) {
+                    return;
+                }
                 var bb  = el.getBoundingClientRect();
 
                 scope.rectWidth = 2 * padding + bb.width;
