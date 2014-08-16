@@ -102,6 +102,7 @@ console.log("moving temp terminal from "+originCenter.x+", "+originCenter.y+" to
                     x: e.clientX,
                     y: e.clientY
                 };
+                
             }
         };
 

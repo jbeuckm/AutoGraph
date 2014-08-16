@@ -1,27 +1,31 @@
 angular.module('AutoGraph').directive('wire', function () {
-
+    
     return {
         type: 'svg',
         restrict: 'E',
         replace: true,
         templateUrl: 'wire/wire-template.svg',
         link: function (scope, element, attributes) {
+console.log(scope.wire);
 
-            scope.$watch(scope.wire, function(){
-                if (scope.wire) {
-                    var origin = scope.terminalElementIndex[scope.wire.origin];
-                    var destination = scope.terminalElementIndex[scope.wire.destination];
-                    console.log('origin:');
-                    console.log(origin);
-                    console.log('destination:');
-                    console.log(destination);
+            this.originTerminal = scope.terminalElementIndex[scope.wire.origin];
+            this.destinationTerminal = scope.terminalElementIndex[scope.wire.destination];
 
-                    var originCenter = origin.getCenter();
-                    var destinationCenter = destination.getCenter();
-
-                    scope.lineData = "M"+originCenter.x+" "+originCenter.y+" L"+destinationCenter.x+" "+destinationCenter.y;
-                }
-            }, true);
+            scope.$watch(scope.wire.destination, function(){
+                console.log('dest change');
+            });
+            scope.$watch(scope.wire.origin, function(){
+                console.log('origin change');
+            });
+            
+            scope.$watch(scope.destinationTerminal, function(){
+console.log('dest terminal watched');
+                this.render();
+            });
+            
+            scope.$on('move', function(){
+                console.log('move');
+            });
 
         },
 
@@ -90,7 +94,25 @@ angular.module('AutoGraph').directive('wire', function () {
          * @method
          */
         render: function () {
+            console.log('render');
 
+            var origin = scope.terminalElementIndex[scope.wire.origin];
+            var destination = scope.terminalElementIndex[scope.wire.destination];
+            console.log('origin:');
+            console.log(origin);
+            console.log(this.originTerminal);
+            console.log('destination:');
+            console.log(destination);
+            console.log(this.destinationTerminal);
+
+            var originCenter = origin.getCenter();
+            var destinationCenter = destination.getCenter();
+
+            scope.lineData = "M"+originCenter.x+" "+originCenter.y+" L"+destinationCenter.x+" "+destinationCenter.y;
+
+            return;
+            
+            
             var m = this.model;
 
             if (m.get("originTerminalId")) {
