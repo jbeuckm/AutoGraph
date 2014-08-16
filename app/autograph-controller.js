@@ -8,7 +8,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             $scope.placed = {
                 components: loaded.components
             };
-            $scope.$apply();
+//            $scope.$apply();
             $scope.placed.wires = loaded.wires;
         });
 
@@ -93,7 +93,11 @@ console.log('complete wire');
         };
         $scope.mouseMove = function(e) {
             if (cursorService.mode == "wire") {
-console.log("moving temp terminal");
+                
+                var originTerminal = $scope.terminalElementIndex[$scope.newWire.origin];
+                var originCenter = originTerminal.getCenter();
+                
+console.log("moving temp terminal from "+originCenter.x+", "+originCenter.y+" to "+e.clientX+", "+e.clientY);
                 $scope.tempTerminal.center = {
                     x: e.clientX,
                     y: e.clientY
