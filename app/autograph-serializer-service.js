@@ -1,4 +1,4 @@
-angular.module('AutoGraph').factory('AutographSerializerService', function() {
+angular.module('AutoGraph').factory('AutographSerializer', function() {
 
     return {
         loadAutograph: function() {
