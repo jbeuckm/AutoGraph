@@ -1,10 +1,12 @@
-angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'cursorModeService', 'AutographSerializerService',
-    function($scope, $rootScope, rfc4122, cursorService, serializer) {
+angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'cursorModeService', 'AutographSerializer', 'TerminalIndex',
+    function($scope, $rootScope, rfc4122, cursorService, serializer, TerminalIndex) {
 
-        $scope.terminalElementIndex = {};
 
         $rootScope.$on('COMPONENT_LIBRARY_LOADED', function(){
             var loaded = serializer.loadAutograph();
+            var componentCount = Object.keys(loaded.components).length;
+            var wireCount = Object.keys(loaded.wires).length;
+            console.log('serializer loaded '+componentCount+' components and '+wireCount+' wires');
             $scope.placed = {
                 components: loaded.components
             };
@@ -38,13 +40,13 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             if (object.inputs)
                 for (var i= 0, l=object.inputs.length; i<l; i++) {
                     object.inputs[i].uuid = rfc4122.newUuid();
-                    $scope.terminalElementIndex[object.inputs[i].uuid] = object.inputs[i];
+                    TerminalIndex.addTerminalElement(object.inputs[i]);
                 }
 
             if (object.outputs)
                 for (var i= 0, l=object.outputs.length; i<l; i++) {
                     object.outputs[i].uuid = rfc4122.newUuid();
-                    $scope.terminalElementIndex[object.outputs[i].uuid] = object.outputs[i];
+                    TerminalIndex.addTerminalElement(object.outputs[i]);
                 }
 
             return object;
@@ -61,9 +63,9 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
         };
 
         $scope.initiateWire = function(originTerminal) {
-console.log('initiate wire');
+console.log('initiate wire with term '+JSON.stringify(originTerminal));
 
-            var origin = $scope.terminalElementIndex[originTerminal.uuid];
+            var origin = TerminalIndex.terminalElementForUUID(originTerminal.uuid);
 
             $scope.tempTerminal = {
                 uuid: rfc4122.newUuid(),
@@ -73,7 +75,7 @@ console.log('initiate wire');
                 center: origin.getCenter()
             };
 
-            $scope.terminalElementIndex[$scope.tempTerminal.uuid] = $scope.tempTerminal;
+            TerminalIndex.addTerminalElement($scope.tempTerminal);
 
             $scope.newWire = {
                 uuid: rfc4122.newUuid(),
@@ -94,7 +96,7 @@ console.log('complete wire');
         $scope.mouseMove = function(e) {
             if (cursorService.mode == "wire") {
                 
-                var originTerminal = $scope.terminalElementIndex[$scope.newWire.origin];
+                var originTerminal = TerminalIndex.terminalElementForUUID($scope.newWire.origin);
                 var originCenter = originTerminal.getCenter();
                 
 console.log("moving temp terminal from "+originCenter.x+", "+originCenter.y+" to "+e.clientX+", "+e.clientY);

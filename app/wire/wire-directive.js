@@ -1,50 +1,13 @@
-angular.module('AutoGraph').directive('wire', function () {
-    
-    return {
-        type: 'svg',
-        restrict: 'E',
-        replace: true,
-        templateUrl: 'wire/wire-template.svg',
-        link: function (scope, element, attributes) {
-console.log(scope.wire);
-
-            this.originTerminal = scope.terminalElementIndex[scope.wire.origin];
-            this.destinationTerminal = scope.terminalElementIndex[scope.wire.destination];
-
-            scope.$watch(scope.wire.destination, function(){
-                console.log('dest change');
-            });
-            scope.$watch(scope.wire.origin, function(){
-                console.log('origin change');
-            });
-            
-            scope.$watch(scope.destinationTerminal, function(){
-console.log('dest terminal watched');
-                this.render();
-            });
-            
-            scope.$on('move', function(){
-                console.log('move');
-            });
-
-        },
-
+angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (TerminalIndex) {
 
         /**
          * @method
          */
-        initialize: function () {
+        var initialize = function () {
             this.d3 = d3.select(this.el);
             var m = this.model;
 
-            this.lineFunction = d3.svg.line()
-                .x(function (d) {
-                    return d.x;
-                })
-                .y(function (d) {
-                    return d.y;
-                })
-                .interpolate("bundle");
+
             /*
              var lineGraphTarget = this.d3.append("path")
              .attr("stroke", "transparent")
@@ -88,25 +51,21 @@ console.log('dest terminal watched');
                 self.d3.remove();
             });
 
-        },
+        };
 
         /**
          * @method
          */
-        render: function () {
+        var render = function (scope) {
             console.log('render');
 
-            var origin = scope.terminalElementIndex[scope.wire.origin];
-            var destination = scope.terminalElementIndex[scope.wire.destination];
             console.log('origin:');
-            console.log(origin);
-            console.log(this.originTerminal);
+            console.log(scope.originTerminal);
             console.log('destination:');
-            console.log(destination);
-            console.log(this.destinationTerminal);
+            console.log(scope.destinationTerminal);
 
-            var originCenter = origin.getCenter();
-            var destinationCenter = destination.getCenter();
+            var originCenter = scope.originTerminal.getCenter();
+            var destinationCenter = scope.destinationTerminal.getCenter();
 
             scope.lineData = "M"+originCenter.x+" "+originCenter.y+" L"+destinationCenter.x+" "+destinationCenter.y;
 
@@ -140,13 +99,58 @@ console.log('dest terminal watched');
                     ];
                 }
 
-//            this.lineGraph.attr("d", this.lineFunction(this.lineData));
-//            this.lineGraphTarget.attr("d", this.lineFunction(this.lineData));
+            this.lineGraph.attr("d", this.lineFunction(this.lineData));
+            this.lineGraphTarget.attr("d", this.lineFunction(this.lineData));
             }
 
-        }
+        };
 
+
+    return {
+        type: 'svg',
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'wire/wire-template.svg',
+        link: function (scope, element, attributes) {
+console.log(scope.wire);
+            if (!scope.wire) throw('no wire model found');
+
+            scope.lineFunction = d3.svg.line()
+                .x(function (d) {
+                    return d.x;
+                })
+                .y(function (d) {
+                    return d.y;
+                })
+                .interpolate("bundle");
+            
+            scope.render = render;
+            scope.render(scope);
+
+            scope.originTerminal = TerminalIndex.terminalElementForUUID(scope.wire.origin);
+            scope.destinationTerminal = TerminalIndex.terminalElementForUUID(scope.wire.destination);
+
+            scope.$watch('wire.destination', function(){
+                console.log('dest change');
+            });
+            scope.$watch('wire.origin', function(){
+                console.log('origin change');
+            });
+            
+            scope.$watch('originTerminal', function(){
+console.log('origin terminal watched');
+                scope.render();
+            });
+            scope.$watch('destinationTerminal', function(){
+console.log('dest terminal watched');
+                scope.render();
+            });
+            
+            scope.$on('move', function(){
+                console.log('move');
+            });
+
+        },
     };
 
-
-});
+}]);

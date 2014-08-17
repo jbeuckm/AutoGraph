@@ -1,0 +1,11 @@
+{
+  "slug": "counter",
+  "label": "counter",
+  "inputs": [
+    { "label": "tick" }
+  ],
+  "outputs": [
+    { "label": "count" }
+  ],
+  "count": 0
+}

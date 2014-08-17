@@ -1,4 +1,4 @@
-angular.module('AutoGraph').directive('terminal', function () {
+angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (TerminalIndex) {
 
     return {
         type: 'svg',
@@ -8,7 +8,8 @@ angular.module('AutoGraph').directive('terminal', function () {
         controller: 'TerminalController',
 
         link: function (scope, element, attributes) {
-
+console.log('linking terminal');
+console.log(element[0]);
             element[0].getCenter = function() {
                 var trans = this.getTransformToElement(scope.svg);
                 return {
@@ -17,7 +18,7 @@ angular.module('AutoGraph').directive('terminal', function () {
                 };
             };
 
-            scope.terminalElementIndex[scope.terminal.uuid] = element[0];
+            TerminalIndex.addTerminalElement(element[0]);
 
             scope.direction = attributes['type'];
 
@@ -59,4 +60,4 @@ angular.module('AutoGraph').directive('terminal', function () {
         }
     };
 
-});
+}]);
