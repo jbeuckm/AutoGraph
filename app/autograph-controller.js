@@ -4,6 +4,9 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
         $rootScope.$on('COMPONENT_LIBRARY_LOADED', function(){
             var loaded = serializer.loadAutograph();
+            var componentCount = Object.keys(loaded.components).length;
+            var wireCount = Object.keys(loaded.wires).length;
+            console.log('serializer loaded '+componentCount+' components and '+wireCount+' wires');
             $scope.placed = {
                 components: loaded.components
             };
