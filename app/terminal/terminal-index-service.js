@@ -4,8 +4,8 @@ angular.module('AutoGraph').service('TerminalIndex', function(){
     
     return {
         
-        addTerminalElement: function(terminalElement) {
-            index[terminalElement.uuid] = terminalElement;
+        addTerminalElement: function(uuid, terminalElement) {
+            index[uuid] = terminalElement;
         },
         
         terminalElementForUUID: function(uuid) {

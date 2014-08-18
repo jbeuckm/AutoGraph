@@ -59,6 +59,9 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
         var render = function (scope) {
             console.log('render');
 
+            scope.originTerminal = TerminalIndex.terminalElementForUUID(scope.wire.origin);
+            scope.destinationTerminal = TerminalIndex.terminalElementForUUID(scope.wire.destination);
+
             console.log('origin:');
             console.log(scope.originTerminal);
             console.log('destination:');
@@ -67,7 +70,7 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
             var originCenter = scope.originTerminal.getCenter();
             var destinationCenter = scope.destinationTerminal.getCenter();
 
-            scope.lineData = "M"+originCenter.x+" "+originCenter.y+" L"+destinationCenter.x+" "+destinationCenter.y;
+            scope.lineData = "M "+originCenter.x+" "+originCenter.y+" L "+destinationCenter.x+" "+destinationCenter.y;
 
             return;
             
@@ -139,11 +142,11 @@ console.log(scope.wire);
             
             scope.$watch('originTerminal', function(){
 console.log('origin terminal watched');
-                scope.render();
+                scope.render(scope);
             });
             scope.$watch('destinationTerminal', function(){
 console.log('dest terminal watched');
-                scope.render();
+                scope.render(scope);
             });
             
             scope.$on('move', function(){

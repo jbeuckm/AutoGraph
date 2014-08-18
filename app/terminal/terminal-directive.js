@@ -1,4 +1,7 @@
 angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (TerminalIndex) {
+    
+    var terminalWidth = 16;
+    var terminalHeight = 4;
 
     return {
         type: 'svg',
@@ -9,21 +12,21 @@ angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (Te
 
         link: function (scope, element, attributes) {
 console.log('linking terminal');
-console.log(element[0]);
             element[0].getCenter = function() {
                 var trans = this.getTransformToElement(scope.svg);
                 return {
-                    x: trans.e + 7,
-                    y: trans.f + ((scope.direction == 'input')? -2 : 2)
+                    x: trans.e + terminalWidth/2,
+                    y: trans.f + ((scope.direction == 'input')? -terminalHeight/2 : terminalHeight/2)
                 };
             };
+console.log(element[0]);
 
-            TerminalIndex.addTerminalElement(element[0]);
+            TerminalIndex.addTerminalElement(scope.terminal.uuid, element[0]);
 
             scope.direction = attributes['type'];
 
             if (scope.direction == 'input') {
-                scope.dy = -4;
+                scope.dy = -terminalHeight;
                 scope.labelDy = -16;
             } else {
                 scope.dy = 0;
@@ -32,18 +35,18 @@ console.log(element[0]);
                 scope.$on('tick', scope.sendTick);
             }
 
-            scope.height = 4;
+            scope.height = terminalHeight;
             scope.mouseOver = function(e) {
-                scope.height = 8;
+                scope.height = terminalHeight * 2;
                 if (scope.direction == 'input') {
-                    scope.dy = -8;
+                    scope.dy = -2 * terminalHeight;
                 }
                 element.find('text').css('visibility', 'visible');
             };
             scope.mouseOut = function(e) {
-                scope.height = 4;
+                scope.height = terminalHeight;
                 if (scope.direction == 'input') {
-                    scope.dy = -4;
+                    scope.dy = -terminalHeight;
                 }
                 element.find('text').css('visibility', 'hidden');
             };

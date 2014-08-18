@@ -1,4 +1,4 @@
-angular.module('AutoGraph').service('cursorModeService', function(){
+angular.module('AutoGraph').service('CursorMode', function(){
 
     this.setCursorMode = function(mode, object) {
         this.mode = mode;

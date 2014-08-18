@@ -1,4 +1,5 @@
-angular.module('AutoGraph').factory('componentLibraryService', function ($rootScope, $document, $http, $q) {
+angular.module('AutoGraph').factory('ComponentLibrary', ['rfc4122', '$rootScope', '$document', '$http', '$q', 
+    function (rfc4122, $rootScope, $document, $http, $q) {
 
     /**
      * Load the model template and create the directive for given component
@@ -90,8 +91,27 @@ angular.module('AutoGraph').factory('componentLibraryService', function ($rootSc
 
                 });
 
+        },
+        
+        
+        componentFromTemplate: function(componentTemplate) {
+            var object = JSON.parse(JSON.stringify(componentTemplate));
+            object.uuid = rfc4122.newUuid();
+
+            if (object.inputs) {
+                for (var i= 0, l=object.inputs.length; i<l; i++) {
+                    object.inputs[i].uuid = rfc4122.newUuid();
+                }
+            }
+            if (object.outputs) {
+                for (var i= 0, l=object.outputs.length; i<l; i++) {
+                    object.outputs[i].uuid = rfc4122.newUuid();
+                }
+            }
+            
+            return object;
         }
 
     };
 
-});
+}]);

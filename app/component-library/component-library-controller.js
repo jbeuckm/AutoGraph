@@ -1,7 +1,7 @@
-angular.module('AutoGraph').controller('ComponentLibraryController', ['$scope', '$rootScope', 'componentLibraryService', 'cursorModeService',
-    function($scope, $rootScope, componentLibraryService, cursorModeService) {
+angular.module('AutoGraph').controller('ComponentLibraryController', ['$scope', '$rootScope', 'ComponentLibrary', 'CursorMode',
+    function($scope, $rootScope, ComponentLibrary, CursorMode) {
 
-    componentLibraryService.loadComponentLibrary('../components/').then(function(data){
+    ComponentLibrary.loadComponentLibrary('../components/').then(function(data){
 
         $scope.components = data;
 
@@ -10,7 +10,7 @@ angular.module('AutoGraph').controller('ComponentLibraryController', ['$scope', 
     });
 
     $scope.setCursorMode = function(mode, object) {
-        cursorModeService.setCursorMode(mode, object);
+        CursorMode.setCursorMode(mode, object);
     };
 
 }]);
