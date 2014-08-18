@@ -3,59 +3,6 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
         /**
          * @method
          */
-        var initialize = function () {
-            this.d3 = d3.select(this.el);
-            var m = this.model;
-
-
-            /*
-             var lineGraphTarget = this.d3.append("path")
-             .attr("stroke", "transparent")
-             .attr("stroke-width", 10)
-             .attr("fill", "none")
-             .style("cursor", "pointer");
-
-             var lineGraph = this.d3.append("path")
-             .attr("class", "wire")
-             .attr("fill", "none")
-             .style("pointer-events", "none");
-             */
-
-            this.listenTo(lineGraphTarget, "mouseover", function () {
-                lineGraphTarget.attr("stroke", "#333");
-            });
-            this.listenTo(lineGraphTarget, "mouseout", function () {
-                lineGraphTarget.attr("stroke", "transparent");
-            });
-            this.listenTo(lineGraphTarget, "contextmenu", function (data, index) {
-
-                d3.event.preventDefault();
-
-                if (confirm('Delete this wire?')) {
-                    m.destroy();
-                }
-            });
-
-            this.lineGraphTarget = lineGraphTarget;
-            this.lineGraph = lineGraph;
-
-            var origin = m.getOriginModel();
-            var destination = m.getDestinationModel();
-
-            this.listenTo(origin, "change", this.render, this);
-            this.listenTo(destination, "change", this.render, this);
-
-            var self = this;
-
-            this.listenTo(m, "destroy", function () {
-                self.d3.remove();
-            });
-
-        };
-
-        /**
-         * @method
-         */
         var render = function (scope) {
             console.log('render');
 
@@ -115,9 +62,11 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
         replace: true,
         templateUrl: 'wire/wire-template.svg',
         link: function (scope, element, attributes) {
-console.log(scope.wire);
-            if (!scope.wire) throw('no wire model found');
 
+            if (!scope.wire) {
+                throw('no wire model found');
+            }
+            
             scope.lineFunction = d3.svg.line()
                 .x(function (d) {
                     return d.x;
@@ -140,11 +89,11 @@ console.log(scope.wire);
                 console.log('origin change');
             });
             
-            scope.$watch('originTerminal', function(){
+            scope.$watch('originTerminal.center', function(){
 console.log('origin terminal watched');
                 scope.render(scope);
             });
-            scope.$watch('destinationTerminal', function(){
+            scope.$watch('destinationTerminal.center', function(){
 console.log('dest terminal watched');
                 scope.render(scope);
             });
