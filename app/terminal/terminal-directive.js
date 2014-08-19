@@ -11,15 +11,23 @@ angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (Te
         controller: 'TerminalController',
 
         link: function (scope, element, attributes) {
-console.log('linking terminal');
-            element[0].getCenter = function() {
-                var trans = this.getTransformToElement(scope.svg);
-                return {
+            
+            scope.updateCenter = function() {
+                var trans = element[0].getTransformToElement(scope.svg);
+                scope.center = {
                     x: trans.e + terminalWidth/2,
                     y: trans.f + ((scope.direction == 'input')? -terminalHeight/2 : terminalHeight/2)
                 };
             };
-console.log(element[0]);
+            
+            element[0].getCenter = function() {
+                return scope.center;
+            };
+            
+            scope.$on('COMPONENT_MOVED', function(a, b){
+console.log("terminal directive hears component move");
+                scope.updateCenter();
+            });
 
             TerminalIndex.addTerminalElement(scope.terminal.uuid, element[0]);
 
@@ -52,6 +60,7 @@ console.log(element[0]);
             };
 
             scope.mouseDown = function(event) {
+                scope.updateCenter();
                 scope.initiateWire(scope.terminal);
                 event.stopPropagation();
             };

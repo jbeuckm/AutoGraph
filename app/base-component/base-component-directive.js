@@ -26,6 +26,7 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
                 
                 scope.component.y = event.pageY - startY;
                 scope.component.x = event.pageX - startX;
+                scope.$broadcast('COMPONENT_MOVED', {component:scope.component});
                 scope.$apply();
             }
 
