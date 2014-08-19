@@ -10,7 +10,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             $scope.placed = {
                 components: loaded.components
             };
-//            $scope.$apply();
+
             $scope.placed.wires = loaded.wires;
         });
 
@@ -24,7 +24,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
                 case 'wire':
                     console.log('cancel wire');
-                    $scope.placed.wires[$scope.newWire.uuid] = null;
+                    delete $scope.placed.wires[$scope.newWire.uuid];
                     CursorMode.mode = null;
                     break;
 
@@ -51,10 +51,7 @@ console.log('initiate wire with term '+JSON.stringify(originTerminal));
 
             $scope.tempTerminal = {
                 uuid: rfc4122.newUuid(),
-                getCenter: function() {
-                    return this.center;
-                },
-                center: origin.getCenter()
+                center: origin.center
             };
 
             TerminalIndex.addTerminalElement($scope.tempTerminal.uuid, $scope.tempTerminal);
@@ -79,7 +76,7 @@ console.log('complete wire');
             if (CursorMode.mode == "wire") {
                 
                 var originTerminal = TerminalIndex.terminalElementForUUID($scope.newWire.origin);
-                var originCenter = originTerminal.getCenter();
+                var originCenter = originTerminal.center;
                 
 console.log("moving temp terminal from "+originCenter.x+", "+originCenter.y+" to "+e.clientX+", "+e.clientY);
                 $scope.tempTerminal.center = {

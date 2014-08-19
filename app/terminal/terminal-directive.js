@@ -19,13 +19,12 @@ angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (Te
                     y: trans.f + ((scope.direction == 'input')? -terminalHeight/2 : terminalHeight/2)
                 };
             };
-            
+/*            
             element[0].getCenter = function() {
                 return element[0].center;
             };
-            
+*/            
             scope.$on('COMPONENT_MOVED', function(a, b){
-console.log("terminal directive hears component move");
                 scope.updateCenter();
             });
 

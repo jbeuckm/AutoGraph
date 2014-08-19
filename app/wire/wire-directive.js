@@ -1,59 +1,32 @@
 angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (TerminalIndex) {
 
-        /**
-         * @method
-         */
-        var render = function (scope) {
-            
-            if (!scope.originTerminal) {
-                console.log("deferring render: no origin");
-                return;
-            }
-            if (!scope.destinationTerminal) {
-                console.log("deferring render: no destination");
-                return;
-            }
+    /**
+     * @method
+     */
+    var render = function (scope) {
 
-            var originCenter = scope.originTerminal.getCenter();
-            var destinationCenter = scope.destinationTerminal.getCenter();
-
-            scope.lineData = "M "+originCenter.x+" "+originCenter.y+" L "+destinationCenter.x+" "+destinationCenter.y;
-
+        if (!scope.originTerminal) {
+            console.log("deferring render: no origin");
             return;
-            
-            
-            var m = this.model;
+        }
+        if (!scope.destinationTerminal) {
+            console.log("deferring render: no destination");
+            return;
+        }
 
-            if (m.get("originTerminalId")) {
+        var originCenter = scope.originTerminal.center;
+        var destinationCenter = scope.destinationTerminal.center;
 
-                var origin = m.getOriginModel();
-                var destination = m.getDestinationModel();
+        scope.linePoints = [
+            { x: originCenter.x, y: originCenter.y },
+            { x: destinationCenter.x, y: destinationCenter.y }
+        ];
 
-                var dx = destination.get("anchorX") - origin.get("anchorX");
-                var dy = destination.get("anchorY") - origin.get("anchorY");
-                var distance = Math.sqrt(dx * dx + dy * dy);
+        scope.lineData = scope.lineFunction(scope.linePoints);
 
-                if (distance > 100) {
+        return;
 
-                    this.lineData = [
-                        { x: origin.get("anchorX"), y: origin.get("anchorY") },
-                        { x: origin.get("controlPointX"), y: origin.get("controlPointY") },
-                        { x: destination.get("controlPointX"), y: destination.get("controlPointY") },
-                        { x: destination.get("anchorX"), y: destination.get("anchorY") }
-                    ];
-                }
-                else {
-                    this.lineData = [
-                        { x: origin.get("anchorX"), y: origin.get("anchorY") },
-                        { x: destination.get("anchorX"), y: destination.get("anchorY") }
-                    ];
-                }
-
-            this.lineGraph.attr("d", this.lineFunction(this.lineData));
-            this.lineGraphTarget.attr("d", this.lineFunction(this.lineData));
-            }
-
-        };
+    };
 
 
     return {
@@ -82,6 +55,9 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
             scope.render = render;
             scope.render(scope);
 
+            scope.$on('$destroy', function(){
+                console.log('destroy'); 
+            });
             scope.$watch('wire.origin', function(){
                 scope.originTerminal = TerminalIndex.terminalElementForUUID(scope.wire.origin);
             });
@@ -90,11 +66,9 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
             });
             
             scope.$watch('originTerminal.center', function(){
-console.log('origin terminal watched');
                 scope.render(scope);
             });
             scope.$watch('destinationTerminal.center', function(){
-console.log('dest terminal watched');
                 scope.render(scope);
             });
             
