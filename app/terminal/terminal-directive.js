@@ -14,14 +14,14 @@ angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (Te
             
             scope.updateCenter = function() {
                 var trans = element[0].getTransformToElement(scope.svg);
-                scope.center = {
+                element[0].center = {
                     x: trans.e + terminalWidth/2,
                     y: trans.f + ((scope.direction == 'input')? -terminalHeight/2 : terminalHeight/2)
                 };
             };
             
             element[0].getCenter = function() {
-                return scope.center;
+                return element[0].center;
             };
             
             scope.$on('COMPONENT_MOVED', function(a, b){

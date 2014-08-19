@@ -4,15 +4,15 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
          * @method
          */
         var render = function (scope) {
-            console.log('render');
-
-            scope.originTerminal = TerminalIndex.terminalElementForUUID(scope.wire.origin);
-            scope.destinationTerminal = TerminalIndex.terminalElementForUUID(scope.wire.destination);
-
-            console.log('origin:');
-            console.log(scope.originTerminal);
-            console.log('destination:');
-            console.log(scope.destinationTerminal);
+            
+            if (!scope.originTerminal) {
+                console.log("deferring render: no origin");
+                return;
+            }
+            if (!scope.destinationTerminal) {
+                console.log("deferring render: no destination");
+                return;
+            }
 
             var originCenter = scope.originTerminal.getCenter();
             var destinationCenter = scope.destinationTerminal.getCenter();
@@ -75,18 +75,18 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
                     return d.y;
                 })
                 .interpolate("bundle");
+
+            scope.originTerminal = TerminalIndex.terminalElementForUUID(scope.wire.origin);
+            scope.destinationTerminal = TerminalIndex.terminalElementForUUID(scope.wire.destination);
             
             scope.render = render;
             scope.render(scope);
 
-            scope.originTerminal = TerminalIndex.terminalElementForUUID(scope.wire.origin);
-            scope.destinationTerminal = TerminalIndex.terminalElementForUUID(scope.wire.destination);
-
-            scope.$watch('wire.destination', function(){
-                console.log('dest change');
-            });
             scope.$watch('wire.origin', function(){
-                console.log('origin change');
+                scope.originTerminal = TerminalIndex.terminalElementForUUID(scope.wire.origin);
+            });
+            scope.$watch('wire.destination', function(a, b){
+                scope.destinationTerminal = TerminalIndex.terminalElementForUUID(scope.wire.destination);
             });
             
             scope.$watch('originTerminal.center', function(){

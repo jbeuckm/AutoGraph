@@ -21,9 +21,6 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             });
 
             function mousemove(event) {
-                
-                console.log(scope.component);
-                
                 scope.component.y = event.pageY - startY;
                 scope.component.x = event.pageX - startX;
                 scope.$broadcast('COMPONENT_MOVED', {component:scope.component});
