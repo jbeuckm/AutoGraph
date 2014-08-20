@@ -91,6 +91,9 @@ body {
 .wire {
   stroke: #ddd;
 }
+.hilighted .wire {
+  stroke: #f99;
+}
 
 input {
   background-color: #fff;

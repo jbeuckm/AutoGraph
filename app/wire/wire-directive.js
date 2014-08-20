@@ -1,4 +1,4 @@
-angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (TerminalIndex) {
+angular.module('AutoGraph').directive('wire', ['$rootScope', 'TerminalIndex', function ($rootScope, TerminalIndex) {
 
     /**
      * @method
@@ -73,8 +73,16 @@ console.log('wire link()');
             });
             
             element[0].addEventListener('contextmenu', function(e) {
-                alert('contextmenu');
                 e.preventDefault();
+                if (confirm('Delete this wire?')) {
+                    $rootScope.deleteWire(scope.wire.uuid);
+                }
+            });
+            element[0].addEventListener('mouseover', function(e) {
+                element.addClass('hilighted');
+            });
+            element[0].addEventListener('mouseout', function(e) {
+                element.removeClass('hilighted');
             });
             
             scope.$on('move', function(){

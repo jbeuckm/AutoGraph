@@ -91,6 +91,10 @@ console.log('complete wire');
                 };
             }
         };
+        $rootScope.deleteWire = function(uuid) {
+            delete $scope.placed.wires[uuid];
+            serializer.saveAutograph($scope.placed);
+        };
 
         $scope.clearComponents = function() {
             $scope.placed = {
