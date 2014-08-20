@@ -1,6 +1,6 @@
 <g>
 
-    <path stroke="transparent" stroke-width="10" fill="none" cursor="pointer" ng-attr-d="{{lineData}}"/>
+    <path class="target" stroke="transparent" stroke-width="10" fill="none" cursor="pointer" ng-attr-d="{{lineData}}"/>
 
     <path class="wire" fill="none" pointer-events="none" ng-attr-d="{{lineData}}"/>
 

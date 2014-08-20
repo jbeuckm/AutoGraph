@@ -72,6 +72,11 @@ console.log('wire link()');
                 scope.render(scope);
             });
             
+            element[0].addEventListener('contextmenu', function(e) {
+                alert('contextmenu');
+                e.preventDefault();
+            });
+            
             scope.$on('move', function(){
                 console.log('move');
             });
