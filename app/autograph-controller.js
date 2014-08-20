@@ -1,17 +1,23 @@
-angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'CursorMode', 'AutographSerializer', 'TerminalIndex', 'ComponentLibrary', 
-    function($scope, $rootScope, rfc4122, CursorMode, serializer, TerminalIndex, ComponentLibrary) {
+angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'CursorMode', 'AutographSerializer', 'TerminalIndex', 'ComponentLibrary', '$timeout', 
+    function($scope, $rootScope, rfc4122, CursorMode, serializer, TerminalIndex, ComponentLibrary, $timeout) {
 
 
         $rootScope.$on('COMPONENT_LIBRARY_LOADED', function(){
+            
             var loaded = serializer.loadAutograph();
+            
             var componentCount = Object.keys(loaded.components).length;
             var wireCount = Object.keys(loaded.wires).length;
             console.log('serializer loaded '+componentCount+' components and '+wireCount+' wires');
+
             $scope.placed = {
                 components: loaded.components
             };
-
-            $scope.placed.wires = loaded.wires;
+            
+            $timeout(function() {
+                $scope.placed.wires = loaded.wires;
+            });
+            
         });
 
         $scope.mouseUp = function(e) {
@@ -78,12 +84,10 @@ console.log('complete wire');
                 var originTerminal = TerminalIndex.terminalElementForUUID($scope.newWire.origin);
                 var originCenter = originTerminal.center;
                 
-console.log("moving temp terminal from "+originCenter.x+", "+originCenter.y+" to "+e.clientX+", "+e.clientY);
                 $scope.tempTerminal.center = {
                     x: e.clientX,
                     y: e.clientY
                 };
-                
             }
         };
 

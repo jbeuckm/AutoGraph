@@ -30,6 +30,8 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             function mouseup() {
                 $document.off('mousemove', mousemove);
                 $document.off('mouseup', mouseup);
+                scope.$broadcast('COMPONENT_MOVED', {component:scope.component});
+                scope.$apply();
             }
 
 

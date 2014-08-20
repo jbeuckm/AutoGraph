@@ -35,7 +35,7 @@ angular.module('AutoGraph').directive('wire', ['TerminalIndex', function (Termin
         replace: true,
         templateUrl: 'wire/wire-template.svg',
         link: function (scope, element, attributes) {
-
+console.log('wire link()');
             if (!scope.wire) {
                 throw('no wire model found');
             }
