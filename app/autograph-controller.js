@@ -1,11 +1,11 @@
-angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'CursorMode', 'AutographSerializer', 'TerminalIndex', 'ComponentLibrary', '$timeout', 
+angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'CursorMode', 'AutographSerializer', 'TerminalIndex', 'ComponentLibrary', '$timeout',
     function($scope, $rootScope, rfc4122, CursorMode, serializer, TerminalIndex, ComponentLibrary, $timeout) {
 
 
         $rootScope.$on('COMPONENT_LIBRARY_LOADED', function(){
-            
+
             var loaded = serializer.loadAutograph();
-            
+
             var componentCount = Object.keys(loaded.components).length;
             var wireCount = Object.keys(loaded.wires).length;
             console.log('serializer loaded '+componentCount+' components and '+wireCount+' wires');
@@ -13,11 +13,11 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             $scope.placed = {
                 components: loaded.components
             };
-            
+
             $timeout(function() {
                 $scope.placed.wires = loaded.wires;
             });
-            
+
         });
 
         $scope.mouseUp = function(e) {
@@ -51,7 +51,6 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
         };
 
         $scope.initiateWire = function(originTerminal) {
-console.log('initiate wire with term '+JSON.stringify(originTerminal));
 
             var origin = TerminalIndex.terminalElementForUUID(originTerminal.uuid);
 
@@ -73,7 +72,7 @@ console.log('initiate wire with term '+JSON.stringify(originTerminal));
             CursorMode.mode = "wire";
         };
         $scope.completeWire = function(destinationTerminal) {
-console.log('complete wire');
+
             $scope.newWire.destination = destinationTerminal.uuid;
 
             CursorMode.mode = null;
@@ -81,10 +80,10 @@ console.log('complete wire');
         };
         $scope.mouseMove = function(e) {
             if (CursorMode.mode == "wire") {
-                
+
                 var originTerminal = TerminalIndex.terminalElementForUUID($scope.newWire.origin);
                 var originCenter = originTerminal.center;
-                
+
                 $scope.tempTerminal.center = {
                     x: e.clientX,
                     y: e.clientY
@@ -106,5 +105,9 @@ console.log('complete wire');
 
         $rootScope.$on('CLEAR_AUTOGRAPH', $scope.clearComponents);
 
-    }
+        $scope.$on('COMPONENT_MOVE_SETTLED', function(a, b){
+            serializer.saveAutograph($scope.placed);
+        });
+
+      }
 ]);
