@@ -19,14 +19,11 @@ console.log('terminal link()');
                     y: trans.f + ((scope.direction == 'input')? -terminalHeight/2 : terminalHeight/2)
                 };
             };
-/*            
-            element[0].getCenter = function() {
-                return element[0].center;
-            };
-*/            
+
             scope.$on('COMPONENT_MOVED', function(a, b){
                 scope.updateCenter();
             });
+            scope.updateCenter();
 
             TerminalIndex.addTerminalElement(scope.terminal.uuid, element[0]);
 
