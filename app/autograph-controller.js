@@ -26,6 +26,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
                 case 'component':
                     $scope.placeNewComponent(CursorMode.object, e.clientX, e.clientY);
                     CursorMode.mode = null;
+                    serializer.saveAutograph($scope.placed);
                     break;
 
                 case 'wire':
@@ -36,7 +37,6 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
             }
 
-            serializer.saveAutograph($scope.placed);
         };
 
 
@@ -77,6 +77,7 @@ console.log('complete wire');
             $scope.newWire.destination = destinationTerminal.uuid;
 
             CursorMode.mode = null;
+            serializer.saveAutograph($scope.placed);
         };
         $scope.mouseMove = function(e) {
             if (CursorMode.mode == "wire") {
