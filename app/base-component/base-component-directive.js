@@ -56,6 +56,9 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             $compile( componentDirective )( scope );
             element.append(componentDirective);
 
+            $timeout(function(){
+                scope.$broadcast('COMPONENT_MOVED', {component:scope.component});
+            });
         }
 
 
