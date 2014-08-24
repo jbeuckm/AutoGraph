@@ -3,8 +3,8 @@
  */
 angular.module('AutoGraph').controller('BaseComponentController', ['$scope', function($scope) {
 
-    $scope.receiveTick = function(input) {
-console.log('receiveTick');
+    $scope.generateTick = function(input) {
+console.log('generateTick');
 
         $scope.$broadcast('tick');
     };

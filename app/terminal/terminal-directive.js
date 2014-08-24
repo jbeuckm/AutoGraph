@@ -11,7 +11,7 @@ angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (Te
         controller: 'TerminalController',
 
         link: function (scope, element, attributes) {
-console.log('terminal link()');           
+
             scope.updateCenter = function() {
                 var trans = element[0].getTransformToElement(scope.svg);
                 element[0].center = {

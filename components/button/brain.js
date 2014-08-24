@@ -3,7 +3,7 @@
     this.link = function(scope, element, attributes, ctrl, transclude) {
 
         element.on('click', function(){
-            scope.receiveTick();
+            scope.generateTick();
         });
     };
 

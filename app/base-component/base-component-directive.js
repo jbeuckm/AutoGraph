@@ -1,4 +1,5 @@
-angular.module('AutoGraph').directive('component', ['$document', '$compile', '$timeout', function($document, $compile, $timeout){
+angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '$compile', '$timeout', 
+                                                    function($rootScope, $document, $compile, $timeout){
 
     return {
         type: 'svg',
@@ -14,27 +15,34 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             element.on('mousedown', function(event) {
                 // Prevent default dragging of selected content
                 event.preventDefault();
-                startX = event.pageX - scope.component.x;
-                startY = event.pageY - scope.component.y;
+                scope.startX = event.pageX - scope.component.x;
+                scope.startY = event.pageY - scope.component.y;
                 $document.on('mousemove', mousemove);
                 $document.on('mouseup', mouseup);
             });
 
             function mousemove(event) {
-                scope.component.y = event.pageY - startY;
-                scope.component.x = event.pageX - startX;
-                scope.$broadcast('COMPONENT_MOVED', {component:scope.component});
+                scope.component.y = event.pageY - scope.startY;
+                scope.component.x = event.pageX - scope.startX;
+                scope.$broadcast('COMPONENT_MOVED', { component:scope.component });
                 scope.$apply();
             }
 
             function mouseup() {
                 $document.off('mousemove', mousemove);
                 $document.off('mouseup', mouseup);
-                scope.$broadcast('COMPONENT_MOVED', {component:scope.component});
-                scope.$emit('COMPONENT_MOVE_SETTLED', {component:scope.component});
+                scope.$broadcast('COMPONENT_MOVED', { component:scope.component });
+                scope.$emit('COMPONENT_MOVE_SETTLED', { component:scope.component });
                 scope.$apply();
             }
 
+            
+            element[0].addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                if (confirm('Delete this component?')) {
+                    $rootScope.deleteComponent(scope.component.uuid);
+                }
+            });
 
             var elementId = scope.component.slug+'-'+scope.component.uuid;
 
@@ -58,9 +66,9 @@ angular.module('AutoGraph').directive('component', ['$document', '$compile', '$t
             element.append(componentDirective);
 
             $timeout(function(){
-            $timeout(function(){
-                scope.$broadcast('COMPONENT_MOVED', {component:scope.component});
-            });
+                $timeout(function(){
+                    scope.$broadcast('COMPONENT_MOVED', {component:scope.component});
+                });
             });
         }
 
