@@ -95,6 +95,28 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             serializer.saveAutograph($scope.placed);
         };
         $rootScope.deleteComponent = function(uuid) {
+            
+            var comp = $scope.placed.components[uuid];
+            var i, deleteUUIDs = [];
+            for (i=0, l=comp.inputs.length; i<l; i++) {
+                deleteUUIDs.push(comp.inputs[i].uuid);
+            }
+            for (i=0, l=comp.outputs.length; i<l; i++) {
+                deleteUUIDs.push(comp.outputs[i].uuid);
+            }
+            
+            for (var j in $scope.placed.wires) {
+                var wire = $scope.placed.wires[j];
+                if (deleteUUIDs.indexOf(wire.origin) != -1) {
+                    $rootScope.deleteWire(wire.uuid);
+                console.log('deleted wire');
+                }
+                else if (deleteUUIDs.indexOf(wire.destination) != -1) {
+                    $rootScope.deleteWire(wire.uuid);
+                console.log('deleted wire');
+                }
+            }
+            
             delete $scope.placed.components[uuid];
             serializer.saveAutograph($scope.placed);
         };
