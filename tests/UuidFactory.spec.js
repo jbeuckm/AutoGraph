@@ -8,13 +8,6 @@ describe('UuidFactory', function(){
 
         angular.mock.module('AutoGraph');
 
-        angular.module('MyAppMock', [])
-            .service('MyServiceDependency', function(){
-                // Define you mock behaviour here.
-            });
-
-        angular.mock.module('MyAppMock');
-
         inject(function($injector){
             MyFactory = $injector.get('rfc4122');
         });

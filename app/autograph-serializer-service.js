@@ -1,6 +1,7 @@
 angular.module('AutoGraph').factory('AutographSerializer', function() {
 
     return {
+
         loadAutograph: function() {
             var string = localStorage.getItem('autograph');
             if (string) {
@@ -15,7 +16,12 @@ angular.module('AutoGraph').factory('AutographSerializer', function() {
 
         saveAutograph: function(placed) {
             localStorage.setItem('autograph', JSON.stringify(placed));
+        },
+
+        clearSaved: function() {
+            localStorage.removeItem('autograph');
         }
+
     };
 
 });
