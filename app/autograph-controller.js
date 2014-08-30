@@ -85,8 +85,8 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
                 var originCenter = originTerminal.center;
 
                 $scope.tempTerminal.center = {
-                    x: e.clientX,
-                    y: e.clientY
+                    x: e.offsetX,
+                    y: e.offsetY
                 };
             }
         };
@@ -109,11 +109,9 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
                 var wire = $scope.placed.wires[j];
                 if (deleteUUIDs.indexOf(wire.origin) != -1) {
                     $rootScope.deleteWire(wire.uuid);
-                console.log('deleted wire');
                 }
                 else if (deleteUUIDs.indexOf(wire.destination) != -1) {
                     $rootScope.deleteWire(wire.uuid);
-                console.log('deleted wire');
                 }
             }
             
