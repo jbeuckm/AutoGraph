@@ -59,8 +59,8 @@ module.exports = function (grunt) {
             server: {
                 cmd: ['screen -S server -d -m python -m SimpleHTTPServer 9000']
             },
-            test: {
-                cmd: []
+            karma: {
+                cmd: ['karma start']
             },
             kill: {
                 cmd: ['screen -X -S server quit', 'screen -X -S proxy quit']
