@@ -14,7 +14,7 @@ describe('ComponentLibrary Service', function(){
     });
 
 
-    it('should save and load configuration', function(){
+    it('should generate a component instance from a template', function(){
 
         var newComponent = componentLibraryService.componentFromTemplate({});
 
