@@ -1,5 +1,4 @@
 
-
 body {
   background-color: #000;
   margin: 0;
@@ -47,46 +46,13 @@ body {
   background-color: #000;
 }
 
-
-.component-rect {
-  stroke: #ddd;
-  stroke-width: 1;
-  fill: rgba(0,0,0,.5);
-  cursor: move;
-}
 .selected-rect {
   stroke: #5ac;
   stroke-width: 2;
   fill: transparent;
   pointer-events: none;
 }
-.component-terminal {
-  fill: #ddd;
-}
-.component-text {
-  fill: #fff;
-  font-family: "Helvetica";
-  font-size: 16px;
-  pointer-events: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: -moz-none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
-.terminal-label {
-  font-size: 10px;
-  fill: #bbb;
-  visibility: hidden;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
 
 .wire {
   stroke: #ddd;
@@ -95,7 +61,4 @@ body {
   stroke: #f99;
 }
 
-input {
-  background-color: #fff;
-}
 

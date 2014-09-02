@@ -12,9 +12,9 @@ angular.module('AutoGraph').factory('ComponentLibrary', ['rfc4122', '$rootScope'
         var componentPath = path + slug + '/';
 
         var files = {
-            model: forceLoadResolve(componentPath + 'model.json'),
-            template: forceLoadResolve(componentPath + 'template.svg'),
-            brain: forceLoadResolve(componentPath + 'brain.js')
+            model: forceLoadResolve(componentPath + 'model.json?v='+Math.random()),
+            template: forceLoadResolve(componentPath + 'template.svg?v='+Math.random()),
+            brain: forceLoadResolve(componentPath + 'brain.js?v='+Math.random())
         };
 
         $q.all(files).then(function(results) {
