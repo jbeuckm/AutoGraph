@@ -38,7 +38,7 @@ input {
   background-color: #fff;
 }
 
-@-webkit-keyframes flash {
+@-webkit-keyframes flash-fill {
     0% {
         fill: Yellow;
         opacity:1;
@@ -56,12 +56,12 @@ input {
     }
 }
 
-.flash {
-  -webkit-animation-name: flash;
+.flash-fill {
+  -webkit-animation-name: flash-fill;
   -webkit-animation-duration: 100ms;
   -webkit-animation-iteration-count: 1;
   -webkit-animation-timing-function: linear;
-  -moz-animation-name: flash;
+  -moz-animation-name: flash-fill;
   -moz-animation-duration: 100ms;
   -moz-animation-iteration-count: 1;
   -moz-animation-timing-function: linear;

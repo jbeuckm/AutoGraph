@@ -4,9 +4,9 @@
 
         element.on('click', function(){
             console.log(element);
-            element.addClass('flash');
+            element.addClass('flash-fill');
             setTimeout(function(){
-                element.removeClass('flash');
+                element.removeClass('flash-fill');
             }, 500);
             scope.generateTick();
         });
