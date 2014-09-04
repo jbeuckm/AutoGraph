@@ -1,13 +1,14 @@
 .component-rect {
   stroke: #ddd;
   stroke-width: 1;
-  fill: rgba(0,0,0,.5);
+  fill: rgba(0, 0, 0, .5);
   cursor: move;
 }
 
 .component-terminal {
   fill: #ddd;
 }
+
 .component-text {
   fill: #fff;
   font-family: "Helvetica";
@@ -46,14 +47,22 @@ input {
         fill: #666;
     }
 }
-    
+@-webkit-keyframes flash-stroke {
+    0% {
+        stroke: Red;
+    }
+    100% {
+        stroke: #666;
+    }
+}
+
 .flash {
   -webkit-animation-name: flash;
-    -webkit-animation-duration: 100ms;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
+  -webkit-animation-duration: 100ms;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: linear;
   -moz-animation-name: flash;
-    -moz-animation-duration: 100ms;
-    -moz-animation-iteration-count: 1;
-    -moz-animation-timing-function: linear;
+  -moz-animation-duration: 100ms;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: linear;
 }
