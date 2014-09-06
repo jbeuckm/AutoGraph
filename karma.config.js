@@ -20,7 +20,7 @@ module.exports = function(config) {
         'app/*.js',
         'app/**/*.js',
         'tests/**/*.spec.js',
-        'tests/*.spec.js',
+        'tests/*.spec.js'
     ],
 
 
