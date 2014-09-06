@@ -19,7 +19,8 @@ module.exports = function(config) {
         'bower_components/angular-mocks/angular-mocks.js',
         'app/*.js',
         'app/**/*.js',
-      'tests/*.spec.js'
+        'tests/**/*.spec.js',
+        'tests/*.spec.js',
     ],
 
 
