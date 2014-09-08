@@ -11,7 +11,7 @@ I am expecting a variety of benefits from the port:
 
 1. better architecture with lessons learned
   * simple hash for serializable component models
-  * ~~~direct calls instead of events for wires~~ (that was not a good plan)
+  * ~~direct calls instead of events for wires~~ (that was not a good plan)
 2. automated data binding (originally manual)
 3. cleaner testing with Protractor
 4. markup instead of procedural component interface building
