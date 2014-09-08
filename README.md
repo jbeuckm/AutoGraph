@@ -13,7 +13,7 @@ I am expecting a variety of benefits from the port:
   * simple hash for serializable component models
   * ~~direct calls instead of events for wires~~ (that was not a good plan)
 2. automated data binding (originally manual)
-3. cleaner testing with Protractor
+3. ~~cleaner testing with Protractor~~ (went with karma for TravisCI)
 4. markup instead of procedural component interface building
 5. cleaner ancestor references with inherited scopes
 6. automated view building (originally manual)
@@ -24,13 +24,13 @@ I am expecting a variety of benefits from the port:
 + ~~establish NPM project~~
 + ~~verify SVG directives will work as they do in my wildest dreams~~
 + ~~protractor running on TravisCI~~ (using karma with firefox instead)
++ ~~D3 Wires interface~~
++ ~~ComponentLibrary~~
++ ~~serialization to LocalStorage~~
++ ~~deserialization~~
 + templated Component directive interface
-+ D3 Wires interface
-+ OOP Controllers
-+ ComponentLibrary
++ OOP Controllers (this may not happen exactly - angular is cool but weird)
 + All v1 Components *represents parity with the original version*
-+ serialization to LocalStorage
-+ deserialization
 + Time Series Graph Component
 + Complex Component building
 + OAuth.io interface
