@@ -48,6 +48,8 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             newComponentModel.y = y;
 
             $scope.placed.components[newComponentModel.uuid] = newComponentModel;
+            
+            return newComponentModel;
         };
 
         $scope.initiateWire = function(originTerminal) {
@@ -56,7 +58,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
             $scope.tempTerminal = {
                 uuid: rfc4122.newUuid(),
-                center: origin.center
+                center: (origin)? origin.center : null // allow for no element for the headless case
             };
 
             TerminalIndex.addTerminalElement($scope.tempTerminal.uuid, $scope.tempTerminal);
@@ -70,6 +72,8 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             $scope.placed.wires[$scope.newWire.uuid] = $scope.newWire;
 
             CursorMode.mode = "wire";
+            
+            return $scope.newWire;
         };
         $scope.completeWire = function(destinationTerminal) {
 
@@ -77,6 +81,8 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
 
             CursorMode.mode = null;
             serializer.saveAutograph($scope.placed);
+            
+            return $scope.newWire;
         };
         $scope.mouseMove = function(e) {
             if (CursorMode.mode == "wire") {
