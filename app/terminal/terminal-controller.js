@@ -1,7 +1,9 @@
 angular.module('AutoGraph').controller('TerminalController', ['$scope', function($scope) {
 
-    $scope.sendTick = function() {
-        console.log($scope.terminalElementIndex[$scope.terminal.uuid]);
-    };
+     $scope.$on('tick', function() {
+        
+        console.log("terminal "+$scope.terminal.uuid+" hears tick");
+        
+    });
 
 }]);
