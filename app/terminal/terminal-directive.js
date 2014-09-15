@@ -36,7 +36,11 @@ angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (Te
                 scope.dy = 0;
                 scope.labelDy = 32;
 
-                scope.$on('tick', scope.sendTick);
+                scope.$on('tick', function() {
+
+                    console.log("terminal "+scope.terminal.uuid+" hears tick");
+
+                });
             }
 
             scope.height = terminalHeight;

@@ -3,7 +3,6 @@
     this.link = function(scope, element, attributes, ctrl, transclude) {
 
         element.on('click', function(){
-            console.log(element);
             element.addClass('flash-fill');
             setTimeout(function(){
                 element.removeClass('flash-fill');
