@@ -32,14 +32,23 @@ angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (Te
             if (scope.direction == 'input') {
                 scope.dy = -terminalHeight;
                 scope.labelDy = -16;
+                
+                element.receiveTick = function() {
+                    console.log("terminal "+scope.terminal.uuid+" hears tick");
+                };
             } else {
                 scope.dy = 0;
                 scope.labelDy = 32;
 
                 scope.$on('tick', function() {
 
-                    console.log("terminal "+scope.terminal.uuid+" hears tick");
-
+                    for (var uuid in scope.placed.wires) {
+                        var wire = scope.placed.wires[uuid];
+                        if (wire.origin == scope.terminal.uuid) {                            
+                            var destination = TerminalIndex.terminalElementForUUID(wire.destination);
+                            angular.element(destination).scope().$parent.receiveTick();
+                        }
+                    }
                 });
             }
 

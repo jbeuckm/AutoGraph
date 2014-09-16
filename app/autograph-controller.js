@@ -1,5 +1,5 @@
-angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'CursorMode', 'AutographSerializer', 'TerminalIndex', 'ComponentLibrary', '$timeout',
-    function($scope, $rootScope, rfc4122, CursorMode, serializer, TerminalIndex, ComponentLibrary, $timeout) {
+angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootScope', 'rfc4122', 'CursorMode', 'AutographSerializer', 'TerminalIndex', 'WireIndex', 'ComponentLibrary', '$timeout',
+    function($scope, $rootScope, rfc4122, CursorMode, serializer, TerminalIndex, WireIndex, ComponentLibrary, $timeout) {
 
 
         $rootScope.$on('COMPONENT_LIBRARY_LOADED', function(){
@@ -17,6 +17,10 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             $timeout(function() {
                 $scope.placed.wires = loaded.wires;
             });
+            
+            for (var i in loaded.wires) {
+                WireIndex.addWire(loaded.wires[i]);
+            }
 
         });
 
@@ -78,6 +82,8 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
         $scope.completeWire = function(destinationTerminal) {
 
             $scope.newWire.destination = destinationTerminal.uuid;
+            
+            WireIndex.addWire($scope.newWire);
 
             CursorMode.mode = null;
             serializer.saveAutograph($scope.placed);
