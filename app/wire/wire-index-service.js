@@ -22,7 +22,16 @@ angular.module('AutoGraph').service('WireIndex', function(){
         },
         
         deleteWire: function(uuid) {
-            throw('DELETE WIRE NOT IMPLEMENTED IN WIRE INDEX');
+            for (var i in index) {
+                var destinationList = index[i];
+                for (var dest in destinationList) {
+                    var wire = destinationList[dest];
+                    if (wire.uuid == uuid) {
+                        delete destinationList[dest];
+                        console.log('deleted wire '+JSON.stringify(wire));
+                    }
+                }
+            }
         }
         
     };
