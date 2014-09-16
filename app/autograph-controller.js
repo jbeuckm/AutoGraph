@@ -103,6 +103,7 @@ angular.module('AutoGraph').controller('AutographController', ['$scope', '$rootS
             }
         };
         $rootScope.deleteWire = function(uuid) {
+            WireIndex.deleteWire(uuid);
             delete $scope.placed.wires[uuid];
             serializer.saveAutograph($scope.placed);
         };
