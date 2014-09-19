@@ -11,6 +11,7 @@ angular.module('AutoGraph').controller('BaseComponentController', ['$scope', fun
     
     $scope.generateTick = function(input) {
 
+        console.log('controller generateTick()');
         $scope.$broadcast('tick');
         
     };
