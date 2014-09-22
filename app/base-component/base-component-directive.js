@@ -64,6 +64,8 @@ angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '
             componentDirective.attr('transform', 'translate('+padding+','+padding+')');
             $compile( componentDirective )( scope );
             element.append(componentDirective);
+            
+            scope.componentDirective = componentDirective;
 
             $timeout(function(){
                 $timeout(function(){

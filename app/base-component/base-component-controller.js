@@ -6,7 +6,10 @@ angular.module('AutoGraph').controller('BaseComponentController', ['$scope', fun
     $scope.receiveTick = function(input) {
 
         console.log('tick');
-console.log($scope);        
+
+        if ($scope.processFunction) {
+            $scope.processFunction();
+        }
     };
     
     $scope.generateTick = function(input) {
