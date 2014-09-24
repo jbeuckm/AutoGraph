@@ -2,7 +2,8 @@
   "slug": "counter",
   "label": "counter",
   "inputs": [
-    { "label": "tick" }
+    { "label": "tick" },
+    { "label": "reset" }
   ],
   "outputs": [
     { "label": "count" }

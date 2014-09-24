@@ -46,7 +46,7 @@ angular.module('AutoGraph').directive('terminal', ['TerminalIndex', function (Te
                         var wire = scope.placed.wires[uuid];
                         if (wire.origin == scope.terminal.uuid) {                            
                             var destination = TerminalIndex.terminalElementForUUID(wire.destination);
-                            angular.element(destination).scope().$parent.receiveTick();
+                            angular.element(destination).scope().$parent.receiveTick(destination);
                         }
                     }
                 });
