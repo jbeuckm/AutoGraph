@@ -15,9 +15,9 @@ angular.module('AutoGraph').controller('BaseComponentController', ['$scope', fun
     $scope.receiveTick = function(source) {
 
         console.log('tick');
-        console.log(angular.element(source));
+        console.log(angular.element(source).scope().terminal.label);
 
-        var tickSource = null;
+        var tickSource = angular.element(source).scope().terminal.label;
         var inputs = {};
 
         if ($scope.processFunction) {
