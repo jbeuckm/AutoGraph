@@ -10,11 +10,12 @@
             console.log("process counter");
             console.log(this);
             $scope.component.count++;
+            $scope.$apply();
             callback(null, inputs);
         };
-    
+
     };
-    
+
 
 
 });
