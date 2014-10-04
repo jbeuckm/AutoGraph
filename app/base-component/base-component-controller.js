@@ -2,7 +2,7 @@
  * Implement basic input to output signal routing
  */
 angular.module('AutoGraph').controller('BaseComponentController', ['$scope', function($scope) {
-    
+
     $scope.generateTick = function(input) {
         console.log('controller generateTick()');
         $scope.$broadcast('tick');
@@ -11,7 +11,7 @@ angular.module('AutoGraph').controller('BaseComponentController', ['$scope', fun
     $scope.processCallback = function(err, outputs) {
         $scope.generateTick();
     };
-    
+
     $scope.receiveTick = function(source) {
 
         console.log('tick');

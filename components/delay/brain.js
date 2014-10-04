@@ -7,13 +7,11 @@
     this.controller = function($scope) {
 
         $scope.processFunction = function(tickSource, inputs, callback) {
-            console.log("process delay");
-            console.log(tickSource);
-            console.log($scope.component);
 
             setTimeout(function(){
                 callback(null, inputs);
-            }, parseInt($scope.component.delay));
+            }, $scope.component.period);
+
         };
 
     };
