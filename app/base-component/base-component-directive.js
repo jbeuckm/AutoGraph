@@ -53,6 +53,9 @@ angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '
                     return;
                 }
                 var bb  = el.getBoundingClientRect();
+                
+                // @Todo: find minimum width due to inputs and outputs
+                
 
                 scope.rectWidth = 2 * padding + bb.width;
                 scope.rectHeight = 2 * padding + bb.height;

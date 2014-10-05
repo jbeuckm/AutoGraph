@@ -13,7 +13,7 @@
 
             setTimeout(function(){
                 callback(null, inputs);
-            }, $scope.component.delay);
+            }, parseInt($scope.component.delay));
         };
 
     };
