@@ -7,7 +7,6 @@
     this.controller = function($scope) {
 
         $scope.interval = function() {
-            console.log('clock tick');
             $scope.generateTick();
         };
 
@@ -17,7 +16,7 @@
 
         $scope.processFunction = function(tickSource, inputs, callback) {
 
-            console.log('tickSource = '+tickSource);
+            console.log('clock tickSource = '+tickSource);
 
             setTimeout(function(){
                 callback(null, inputs);
