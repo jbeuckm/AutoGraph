@@ -1,4 +1,4 @@
-angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '$compile', '$timeout', 
+angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '$compile', '$timeout',
                                                     function($rootScope, $document, $compile, $timeout){
 
     return {
@@ -11,6 +11,7 @@ angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '
         link: function (scope, element, attributes, ctrl, transclude) {
 
             var padding = 4;
+            var widthFromTerminals = 20 * Math.max(scope.component.inputs.length, scope.component.outputs.length);
 
             element.on('mousedown', function(event) {
                 // Prevent default dragging of selected content
@@ -36,7 +37,7 @@ angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '
                 scope.$apply();
             }
 
-            
+
             element[0].addEventListener('contextmenu', function(e) {
                 e.preventDefault();
                 if (confirm('Delete this component?')) {
@@ -53,11 +54,11 @@ angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '
                     return;
                 }
                 var bb  = el.getBoundingClientRect();
-                
-                // @Todo: find minimum width due to inputs and outputs
-                
 
-                scope.rectWidth = 2 * padding + bb.width;
+                // @Todo: find minimum width due to inputs and outputs
+
+
+                scope.rectWidth = Math.max(widthFromTerminals, 2 * padding + bb.width);
                 scope.rectHeight = 2 * padding + bb.height;
             });
 
@@ -67,7 +68,7 @@ angular.module('AutoGraph').directive('component', ['$rootScope', '$document', '
             componentDirective.attr('transform', 'translate('+padding+','+padding+')');
             $compile( componentDirective )( scope );
             element.append(componentDirective);
-            
+
             scope.componentDirective = componentDirective;
 
             $timeout(function(){
