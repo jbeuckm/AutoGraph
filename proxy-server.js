@@ -7,7 +7,6 @@
  */
 
 var http = require('http');
-var sys = require('sys');
 var fs = require('fs');
 var url = require('url');
 
@@ -24,7 +23,7 @@ fs.watchFile('./iplist', function (c, p) {
 function update_blacklist() {
     fs.stat('./blacklist', function (err, stats) {
         if (!err) {
-            sys.log("Updating blacklist.");
+            console.log("Updating blacklist.");
             blacklist = fs.readFileSync('./blacklist').split('\n')
                 .filter(function (rx) {
                     return rx.length
@@ -39,7 +38,7 @@ function update_blacklist() {
 function update_iplist() {
     fs.stat('./iplist', function (err, stats) {
         if (!err) {
-            sys.log("Updating iplist.");
+            console.log("Updating iplist.");
             iplist = fs.readFileSync('./iplist').split('\n')
                 .filter(function (rx) {
                     return rx.length
@@ -84,20 +83,20 @@ http.createServer(function (request, response) {
     if (!ip_allowed(ip)) {
         msg = "IP " + ip + " is not allowed to use this proxy";
         deny(response, msg);
-        sys.log(msg);
+        console.log(msg);
         return;
     }
 
     if (!host_allowed(request.url)) {
         msg = "Host " + request.url + " has been denied by proxy configuration";
         deny(response, msg);
-        sys.log(msg);
+        console.log(msg);
         return;
     }
 
     var request_url = decodeURIComponent(request.url).slice(1);
 
-    sys.log(ip + ": " + request.method + " " + request_url);
+    console.log(ip + ": " + request.method + " " + request_url);
 
     var request_parts = url.parse(request_url);
 
@@ -134,4 +133,3 @@ http.createServer(function (request, response) {
 
 update_blacklist();
 update_iplist();
-
